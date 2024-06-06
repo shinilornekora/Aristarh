@@ -26,7 +26,7 @@
 npm install -g nodemon ts-node
 
 # В корне проекта делаем:
-
+npm ci
 npm run prepare-dev
 npm start
 ```
