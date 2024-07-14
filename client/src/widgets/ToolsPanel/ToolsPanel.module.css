@@ -1,0 +1,46 @@
+.container {
+    height: 70px;
+    width: 700px;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    gap: 15px;
+    align-items: center;
+    justify-content: space-between;
+    border: 3px solid black;
+    border-radius: 15px;
+    background-color: rgb(136, 136, 136);
+    margin-left: 15px;
+    margin-top: 15px;
+    margin: 15px 15px;
+}
+
+.project {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inria Sans', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    border-right: 3px solid black;
+    height: 100%;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 40px;
+    padding-left: 25px;
+}
+
+.buttons img:hover {
+    cursor: pointer;
+    opacity: .6;
+}
+
+.text {
+    padding: 0 30px;
+    align-items: center;
+    justify-content: center;
+}
