@@ -4,7 +4,7 @@ export const menuButtons: ButtonProps[] = [
     {
         name: 'common',
         size: 32,
-        type: 'svg'
+        type: 'svg',
     },
     {
         name: 'cursor',

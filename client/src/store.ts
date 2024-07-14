@@ -12,6 +12,9 @@ const initialState = {
         tree: {}
     },
     user: '',
+    control: {
+        activePopup: undefined,
+    }
 }
 
 export enum Actions {
@@ -19,6 +22,7 @@ export enum Actions {
     ADD_TO_TREE = 'add-to-tree',
     REMOVE_FROM_TREE = 'remove-from-tree',
     CHANGE_CORDS = 'change-cords',
+    SET_VISIBLE_POPUP = 'set-visible-popup',
 }
 
 type Line = 'x' | 'y';
@@ -27,7 +31,9 @@ interface Payload {
     name?: string;
     cords?: Record<Line, number>
     nodes?: Node[];
-    path: string[];
+    path?: string[];
+    popup?: 'common' | 'server';
+
 }
 
 export interface StateType {
@@ -36,6 +42,9 @@ export interface StateType {
         tree: Node;
     }
     user: string;
+    control: {
+        activePopup?: 'common' | 'server';
+    }
 }
 interface ActionType {
     type: Actions;
@@ -54,6 +63,10 @@ const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action
         case Actions.ADD_TO_TREE:
             let nodePlace = state.project.tree;
 
+            if (!payload.path) {
+                return state;
+            }
+
             for (const node of payload.path) {
                 const currentNode = nodePlace.children?.find(child => child.name == node);
 
@@ -65,6 +78,14 @@ const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action
             }
             
             nodePlace.children = payload.nodes
+        case Actions.SET_VISIBLE_POPUP:
+            return {
+                ...state,
+                control: {
+                    ...state.control,
+                    activePopup: action.payload.popup,
+                }
+            }
         default:
             return state;
     }

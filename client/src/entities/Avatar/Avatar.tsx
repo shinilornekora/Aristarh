@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { MutableRefObject, useState } from 'react';
 
 export type ButtonProps = {
     name: string;
     size: number;
+    smartRef?: MutableRefObject<HTMLImageElement | null>;
     type: 'svg' | 'png';
+    onClick?: (eventful: unknown) => void;
 }
 
-export const Avatar: React.FC<ButtonProps> = ({ name, size, type }) => {
+export const Avatar: React.FC<ButtonProps> = ({ onClick, name, size, type, smartRef }) => {
     const [img, setImg] = useState('');
 
     if (type !== 'svg') {
@@ -17,7 +19,9 @@ export const Avatar: React.FC<ButtonProps> = ({ name, size, type }) => {
 
     return (
         <img 
+            onClick={ onClick }
             src={ img }
+            ref={ smartRef }
             width={ size }
             height={ size }
             alt={ name }
