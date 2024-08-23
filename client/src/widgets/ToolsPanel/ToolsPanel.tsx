@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react"
+import React, { useCallback, useMemo, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux";
 
 import { Avatar } from "../../entities/Avatar";
@@ -12,20 +12,34 @@ import * as css from './ToolsPanel.module.css';
 
 type DropdownsType = 'common' | 'server' | undefined;
 
+export type ImageEvent = { currentTarget: HTMLImageElement };
+
 export const ToolsPanel = () => {
     const name = useSelector<StateType, string>(state => state.project.name)
     const currentPopup = useSelector<StateType, DropdownsType>(state => state.control.activePopup);
     const dispatch = useDispatch();
 
     const ref = useRef<HTMLImageElement | null>(null)
-    const handleToolClick = useCallback(({ currentTarget }: any) => {
-        dispatch({
-            type: Actions.SET_VISIBLE_POPUP,
+    
+    const onPopupClose = useCallback(() => dispatch({
+        type: Actions.SET_VISIBLE_MENU_POPUP,
             payload: {
-                popup: currentTarget.alt
+                popup: null
+            }
+    }), []);
+
+    const handleToolClick = useCallback((event: unknown) => {
+        dispatch({
+            type: Actions.SET_VISIBLE_MENU_POPUP,
+            payload: {
+                popup: (event as ImageEvent).currentTarget.alt
             }
         })
     }, []);
+
+    const additionals = useMemo(() => ({
+        extraCloseCheck: ({ currentTarget }: ImageEvent) => menuButtons.some(button => currentTarget.alt === button.name),
+    }), [currentPopup])
 
     return (
         <div className={ css.container }>
@@ -50,8 +64,10 @@ export const ToolsPanel = () => {
             </div>
             {
                 currentPopup && <Dropdown
-                    smartRef={ ref }
                     options={ dropdowns[currentPopup] }
+                    additionals={ additionals}
+                    onClose={ onPopupClose }
+                    smartRef={ ref }
                 />
             }
         </div>

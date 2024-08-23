@@ -19,10 +19,11 @@ const initialState = {
 
 export enum Actions {
     CREATE_PROJECT = 'create-project',
+    RENAME_PROJECT = 'rename-project',
     ADD_TO_TREE = 'add-to-tree',
     REMOVE_FROM_TREE = 'remove-from-tree',
     CHANGE_CORDS = 'change-cords',
-    SET_VISIBLE_POPUP = 'set-visible-popup',
+    SET_VISIBLE_MENU_POPUP = 'set-visible-popup',
 }
 
 type Line = 'x' | 'y';
@@ -33,7 +34,6 @@ interface Payload {
     nodes?: Node[];
     path?: string[];
     popup?: 'common' | 'server';
-
 }
 
 export interface StateType {
@@ -78,12 +78,24 @@ const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action
             }
             
             nodePlace.children = payload.nodes
-        case Actions.SET_VISIBLE_POPUP:
+        case Actions.SET_VISIBLE_MENU_POPUP:
             return {
                 ...state,
                 control: {
                     ...state.control,
                     activePopup: action.payload.popup,
+                }
+            }
+        case Actions.RENAME_PROJECT:
+            if (!action.payload.name) {
+                return state;
+            }
+
+            return {
+                ...state,
+                project: {
+                    ...state.project,
+                    name: action.payload.name
                 }
             }
         default:
