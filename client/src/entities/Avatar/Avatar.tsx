@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useState } from 'react';
+import React, {MutableRefObject, useCallback, useEffect, useRef, useState} from 'react';
 
 export type ButtonProps = {
     name: string;
@@ -10,18 +10,38 @@ export type ButtonProps = {
 
 export const Avatar: React.FC<ButtonProps> = ({ onClick, name, size, type, smartRef }) => {
     const [img, setImg] = useState('');
+    const self = useRef(null);
 
     if (type !== 'svg') {
-        return 'Unsupported static file type!';
+        return <>'Unsupported static file type!'</>;
     }
 
-    import(`../../static/svg/icon-${name}.${type}`).then(image => setImg(image.default));
+    useEffect(() => {
+        (async () =>
+            import(`../../static/svg/icon-${name}.${type}`)
+                .then(image => setImg(image.default))
+        )();
+    }, [name, type]);
+
+    const handleClick = useCallback(event => {
+        if (!onClick) {
+            return
+        }
+
+        if (!smartRef) {
+            // Считаем что картинка про внешний мир не знает
+            return onClick(event);
+        }
+
+        smartRef.current = self.current;
+        onClick(event);
+    }, [onClick, smartRef])
 
     return (
-        <img 
-            onClick={ onClick }
+        <img
+            onClick={ handleClick }
             src={ img }
-            ref={ smartRef }
+            ref={ self }
             width={ size }
             height={ size }
             alt={ name }
