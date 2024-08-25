@@ -1,3 +1,11 @@
+import { store } from '../../store';
+import { Actions } from '../../types';
+
+/**
+ * Так, тут стоит понять что handler по сути только и должен запускать диспатчи
+ * Не стоит здесь примешивать какую-то иную логику иначе будет сложно жить
+ * Ну и надо бы как-то разнести этот объект
+ */
 export const dropdowns = {
     'common': [
         {
@@ -14,7 +22,7 @@ export const dropdowns = {
         },
         {
             name: 'Rename project',
-            handler: () => {},
+            handler: () => store.dispatch({ type: Actions.START_RENAMING_POPUP_SCENARIO }),
         }
     ],
     'cursor': [
@@ -37,7 +45,7 @@ export const dropdowns = {
     ],
     'widget': [
         {
-            name: 'test',
+            name: 'Show widget',
             handler: () => {}
         }
     ],

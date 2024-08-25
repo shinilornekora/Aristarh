@@ -1,10 +1,5 @@
 import { Reducer, configureStore } from '@reduxjs/toolkit';
-
-interface Node {
-    name?: string;
-    component?: JSX.Element;
-    children?: Node[];
-}
+import { Actions, ActionType, StateType } from './types';
 
 const initialState = {
     project: {
@@ -14,43 +9,13 @@ const initialState = {
     user: '',
     control: {
         activePopup: undefined,
+    },
+    scenarios: {
+        renamingProject: false,
     }
 }
 
-export enum Actions {
-    CREATE_PROJECT = 'create-project',
-    RENAME_PROJECT = 'rename-project',
-    ADD_TO_TREE = 'add-to-tree',
-    REMOVE_FROM_TREE = 'remove-from-tree',
-    CHANGE_CORDS = 'change-cords',
-    SET_VISIBLE_MENU_POPUP = 'set-visible-popup',
-}
-
-type Line = 'x' | 'y';
-
-interface Payload {
-    name?: string;
-    cords?: Record<Line, number>
-    nodes?: Node[];
-    path?: string[];
-    popup?: 'common' | 'server';
-}
-
-export interface StateType {
-    project: {
-        name: string;
-        tree: Node;
-    }
-    user: string;
-    control: {
-        activePopup?: 'common' | 'server';
-    }
-}
-interface ActionType {
-    type: Actions;
-    payload: Payload;
-};
-
+// TODO: если все таки понравится Effector, то перейти на его рельсы - иначе распилить тут все на комбайнеры
 const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action) => {
     const { type, payload } = action;
 
@@ -86,6 +51,24 @@ const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action
                     activePopup: action.payload.popup,
                 }
             }
+        case Actions.START_RENAMING_POPUP_SCENARIO: {
+            return {
+                ...state,
+                scenarios: {
+                    ...state.scenarios,
+                    renamingProject: true,
+                }
+            }
+        }
+        case Actions.END_RENAMING_POPUP_SCENARIO: {
+            return {
+                ...state,
+                scenarios: {
+                    ...state.scenarios,
+                    renamingProject: false,
+                }
+            }
+        }
         case Actions.RENAME_PROJECT:
             if (!action.payload.name) {
                 return state;

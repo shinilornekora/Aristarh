@@ -1,18 +1,14 @@
 import React, { useCallback, useMemo, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux";
 
-import { Avatar } from "../../entities/Avatar";
+import { Avatar } from "../../shared/Avatar";
 import { menuButtons } from "./buttons";
 import { dropdowns } from "./popup";
 
-import { Actions, StateType } from "../../store";
-import { Dropdown } from "../../entities/Dropdown";
+import { Actions, DropdownsType, ImageEvent, StateType } from "../../types";
+import { Dropdown } from "../../shared/Dropdown";
 
 import * as css from './ToolsPanel.module.css';
-
-type DropdownsType = 'common' | 'server' | undefined;
-
-export type ImageEvent = { currentTarget: HTMLImageElement };
 
 export const ToolsPanel = () => {
     const name = useSelector<StateType, string>(state => state.project.name)

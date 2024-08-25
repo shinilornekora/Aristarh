@@ -1,4 +1,10 @@
-import React, {MutableRefObject, useCallback, useEffect, useRef, useState} from 'react';
+import React, {
+    MutableRefObject, 
+    useCallback, 
+    useEffect, 
+    useRef, 
+    useState
+} from 'react';
 
 export type ButtonProps = {
     name: string;
@@ -23,7 +29,7 @@ export const Avatar: React.FC<ButtonProps> = ({ onClick, name, size, type, smart
         )();
     }, [name, type]);
 
-    const handleClick = useCallback(event => {
+    const handleClick = useCallback((event: unknown) => {
         if (!onClick) {
             return
         }
