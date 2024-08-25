@@ -1,5 +1,5 @@
-import { store } from '../../store';
-import { Actions } from '../../types';
+import { store } from '../../shared/store';
+import { Actions } from '../../shared/types';
 
 /**
  * Так, тут стоит понять что handler по сути только и должен запускать диспатчи

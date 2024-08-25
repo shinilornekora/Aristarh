@@ -1,6 +1,8 @@
 import { Reducer, configureStore } from '@reduxjs/toolkit';
 import { Actions, ActionType, StateType } from './types';
 
+require('../aristarh');
+
 const initialState = {
     project: {
         name: 'Unnamed',
@@ -18,6 +20,10 @@ const initialState = {
 // TODO: если все таки понравится Effector, то перейти на его рельсы - иначе распилить тут все на комбайнеры
 const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action) => {
     const { type, payload } = action;
+
+    if (Aristarh.DEBUG === 'log') {
+        console.log(`[dispatcher]: triggered ${action.type}, payload:`, action.payload);
+    }
 
     switch(type) {
         case Actions.CREATE_PROJECT:

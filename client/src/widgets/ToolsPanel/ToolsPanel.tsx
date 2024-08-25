@@ -5,7 +5,7 @@ import { Avatar } from "../../shared/Avatar";
 import { menuButtons } from "./buttons";
 import { dropdowns } from "./popup";
 
-import { Actions, DropdownsType, ImageEvent, StateType } from "../../types";
+import { Actions, DropdownsType, ImageEvent, StateType } from "../../shared/types";
 import { Dropdown } from "../../shared/Dropdown";
 
 import * as css from './ToolsPanel.module.css';

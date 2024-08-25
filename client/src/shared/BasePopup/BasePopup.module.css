@@ -1,0 +1,35 @@
+.inner_popup {
+    display: block;
+    min-height: inherit;
+}
+
+.outer {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .4);
+}
+
+.popup {
+    background-color: aliceblue;
+    border: 1px solid rgb(81, 81, 81);
+    border-radius: 10px;
+}
+
+.small_v {
+    min-width: 200px;
+    min-height: 50px;
+}
+
+.medium_v {
+    min-width: 400px;
+    min-height: 100px;
+}
+
+.large_v {
+    min-width: 800px;
+    min-height: 200px;
+}
