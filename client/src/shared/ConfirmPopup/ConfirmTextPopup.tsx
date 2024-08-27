@@ -4,6 +4,8 @@ import { BasePopup } from "../BasePopup"
 import cn from 'classnames';
 
 import * as css from './ConfirmTextPopup.module.css';
+import { useDispatch } from 'react-redux';
+import { Actions } from '../types';
 
 type Props = {
     text: string;
@@ -17,6 +19,7 @@ const MAX_INPUT_LIMIT = 47;
 export const ConfirmTextPopup: React.FC<Props> = ({ text, inputId, cb, cannotBeEmpty }) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const [errorText, setErrorText] = useState<string>('');
+    const dispatcher = useDispatch();
 
     const onConfirm = useCallback((event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -35,14 +38,14 @@ export const ConfirmTextPopup: React.FC<Props> = ({ text, inputId, cb, cannotBeE
         }
 
         cb(inputRef.current.value)
-
+        dispatcher({ type: Actions.END_RENAMING_POPUP_SCENARIO });
     }, [cb, inputRef.current?.value, cannotBeEmpty]);
     
     return (
         <BasePopup size="large">
             <form className={ css.form } onSubmit={ onConfirm }>
                 <section className={ css.popupText }>
-                    <label htmlFor={ inputId }>{ text }</label>
+                    <label className={ css.text } htmlFor={ inputId }>{ text }</label>
                     <input 
                         ref={ inputRef }
                         className={ cn(css.input, {

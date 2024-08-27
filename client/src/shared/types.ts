@@ -11,6 +11,19 @@ export enum Actions {
     SET_VISIBLE_MENU_POPUP = 'set-visible-popup',
     START_RENAMING_POPUP_SCENARIO = 'start-renaming-popup-scenario',
     END_RENAMING_POPUP_SCENARIO = 'end-renaming-popup-scenario',
+    START_SUPPORT_POPUP_SCENARIO = 'start-support-popup-scenario',
+    END_SUPPORT_POPUP_SCENARIO = 'end-support-popup-scenario',
+    START_PREVIEW_SCENARIO = 'start-preview-scenario',
+    END_PREVIEW_SCENARIO = 'end-preview-scenario',
+    START_IMPORT_SCENARIO = 'start-import-scenario',
+    END_IMPORT_SCENARIO = 'end-import-scenario',
+    START_EXPORT_SCENARIO = 'start-export-scenario',
+    END_EXPORT_SCENARIO = 'end-export-scenario',
+    START_EXPORT_PROJECT_SCENARIO = 'start-export-project-scenario',
+    CHANGE_MOUSE_STATE = 'change-mouse-state',
+    OPEN_RIGHT_COLUMN = 'open-right-column',
+    OPEN_PAGE_SETTINGS = 'open-page-settins',
+    OPEN_SERVER_SETTINGS = 'open-server-settings'
 }
 
 export interface Node {
@@ -34,11 +47,13 @@ export interface Payload {
     popup?: 'common' | 'server';
 }
 
+export type Project = {
+    name: string;
+    tree: Node;
+}
+
 export interface StateType {
-    project: {
-        name: string;
-        tree: Node;
-    }
+    project: Project;
     user: string;
     control: {
         activePopup?: DropdownsType;
@@ -47,3 +62,40 @@ export interface StateType {
         renamingProject: boolean; 
     }
 }
+
+// API part
+
+export type BaseRequest<P, R> = (params: P) => Promise<R>;
+
+export type ProjectSettings = {
+    name: string;
+    tree: Node;
+};
+
+export interface ProjectApi {
+    export: BaseRequest<Record<string, unknown>, { link: string }>;
+    import: BaseRequest<ProjectSettings, Record<string, unknown>>;
+}
+
+export interface Api {
+    project: ProjectApi,
+}
+
+export type ApiEntity = keyof Api;
+
+export type ApiHandler = keyof Api[ApiEntity];
+
+export type ApiHandlerReturnType = Api[ApiEntity][ApiHandler]
+
+export interface ProjectApiBase {
+    export: string;
+    import: string;
+}
+
+export interface ApiBaseType {
+    project: ProjectApiBase
+}
+
+export type ApiBaseEntity = keyof ApiBaseType;
+
+export type ApiBaseHandler = keyof ApiBaseType[ApiBaseEntity];

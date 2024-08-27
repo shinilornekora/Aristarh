@@ -4,6 +4,10 @@
     gap: 20px;
 }
 
+.text {
+    font-size: 2.5vw;
+}
+
 .form {
     display: flex;
     height: 100%;
@@ -21,6 +25,7 @@
 .button {
     max-width: fit-content;
     align-self: last baseline;
+    font-size: 1.5vw;
     padding: 5px 15px;
     border: 1px solid rgb(81, 81, 81);
     border-radius: 4px;
@@ -32,5 +37,5 @@
 }
 
 .errorText {
-    font-size: 10px;
+    font-size: 1.5vw;
 }

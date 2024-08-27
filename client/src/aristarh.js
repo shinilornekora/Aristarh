@@ -13,4 +13,7 @@
 window['Aristarh'] = {
     DEBUG: 'disabled',
     setDebugMode: (value) => Aristarh.DEBUG = value,
+    log: (text, rest, level) => Aristarh.DEBUG === 'log' ? console[level](text, rest) : null,
+    voice: (text, ...rest) => Aristarh.log(text, rest, 'log'),
+    scream: (error, ...rest) => Aristarh.log(error, rest, 'error')
 }

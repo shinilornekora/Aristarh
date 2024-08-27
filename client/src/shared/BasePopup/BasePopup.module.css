@@ -20,16 +20,16 @@
 }
 
 .small_v {
-    min-width: 200px;
-    min-height: 50px;
+    min-width: 20%;
+    min-height: 5%;
 }
 
 .medium_v {
-    min-width: 400px;
-    min-height: 100px;
+    min-width: 40%;
+    min-height: 10%;
 }
 
 .large_v {
-    min-width: 800px;
-    min-height: 200px;
+    min-width: 80%;
+    min-height: 20%;
 }
