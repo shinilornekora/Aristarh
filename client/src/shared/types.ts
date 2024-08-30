@@ -73,7 +73,7 @@ export type ProjectSettings = {
 };
 
 export interface ProjectApi {
-    export: BaseRequest<Record<string, unknown>, { link: string }>;
+    export: BaseRequest<Record<string, unknown>, { project: ProjectSettings }>;
     import: BaseRequest<ProjectSettings, Record<string, unknown>>;
 }
 

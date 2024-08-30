@@ -24,17 +24,31 @@ const initialState = {
 // TODO: перенести метод в utils и создать вообще такой файл - цель, сбор хелперов
 async function exportProjectScheme({ name, tree }: Project) {
     // Сервер еще должен записать это в журнал действий пользователя
-    const { link } = await api.project.export({ name, tree })
+    const { project } = await api.project.export({ name, tree })
     
-    if (!link) {
-        Aristarh.voice('[exporter]: Project cannot be exported, no download link from server.');
+    if (!project) {
+        Aristarh.voice('[exporter]: Project cannot be exported, because server is down.');
         return;
     }
     
-    const fakeElement = document.createElement('a');
-    fakeElement.download = link;
-    fakeElement.click();
+    downloadJSON(project);
 }
+
+async function downloadJSON(json: Record<string, unknown>) {
+    try {
+        const jsonData = JSON.stringify(json, null, 2); 
+    
+        const downloadLink = document.createElement('a');
+        downloadLink.href = `data:application/json;charset=utf-8,${encodeURIComponent(jsonData)}`;
+        downloadLink.download = 'project.json';
+    
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    } catch (error) {
+        console.error('Ошибка при скачивании данных:', error);
+    }
+}  
 
 // TODO: если все таки понравится Effector, то перейти на его рельсы - иначе распилить тут все на комбайнеры
 const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action) => {

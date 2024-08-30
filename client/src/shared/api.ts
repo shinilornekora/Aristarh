@@ -27,7 +27,7 @@ function formatAPI(apis: ApiBaseType): Api {
 
             // TODO: индексация хочет быть через И, я же хочу чтобы она была через ИЛИ.
             // @ts-expect-error: сложные типы
-            apiSchema[entity][key] = prepareForApiCall(`${SERVER_API_ROUTE}${path}`) as Partial<ApiHandlerReturnType>
+            apiSchema[entity][key] = prepareForApiCall(`${SERVER_API_ROUTE}${path}/`) as Partial<ApiHandlerReturnType>
         })
     }
 
@@ -35,7 +35,18 @@ function formatAPI(apis: ApiBaseType): Api {
 }
 
 function prepareForApiCall(callPath: string) {
-    return async (params: Record<string, unknown>) => await fetch(callPath, params) as unknown
+    return async (params: Record<string, unknown>) => {
+        const callParams = {
+            method: 'post',
+            body: JSON.stringify({ ...params }),
+        }
+
+        const response = (await fetch(callPath, callParams) as unknown).json();
+
+        Aristarh.voice(`Получен ответ с ручки ${callPath}`, response);
+
+        return response;
+    }
 }
 
 const ApiBase = {
