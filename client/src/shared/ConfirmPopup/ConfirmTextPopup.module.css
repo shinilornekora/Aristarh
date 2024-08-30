@@ -1,0 +1,41 @@
+.popupText {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.text {
+    font-size: 2.5vw;
+}
+
+.form {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 20px;
+    min-height: inherit;
+}
+
+.input {
+    padding-top: 5px 10px;
+}
+
+.button {
+    max-width: fit-content;
+    align-self: last baseline;
+    font-size: 1.5vw;
+    padding: 5px 15px;
+    border: 1px solid rgb(81, 81, 81);
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.error {
+    border: 1px solid red;
+}
+
+.errorText {
+    font-size: 1.5vw;
+}

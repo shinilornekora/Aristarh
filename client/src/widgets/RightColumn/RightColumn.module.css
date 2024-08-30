@@ -1,0 +1,12 @@
+.container {
+    display: none;
+    position: absolute;
+    right: -500px;
+    flex-direction: column;
+    background-color: rgb(136, 136, 136);
+    width: 500px;
+    height: calc(100% - 40px);
+    margin-top: 20px;
+    border-radius: 15px;
+    opacity: .8;
+}
