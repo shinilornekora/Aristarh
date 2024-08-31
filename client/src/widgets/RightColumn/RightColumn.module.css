@@ -1,12 +1,15 @@
 .container {
-    display: none;
+    display: flex;
     position: absolute;
+    align-items: center;
+
     right: -500px;
+    border: 3px solid black;
+    border-radius: 15px;
     flex-direction: column;
     background-color: rgb(136, 136, 136);
-    width: 500px;
+    width: 336px;
     height: calc(100% - 40px);
     margin-top: 20px;
-    border-radius: 15px;
     opacity: .8;
 }
