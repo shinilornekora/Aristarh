@@ -1,14 +1,14 @@
 import { Reducer, configureStore } from '@reduxjs/toolkit';
-import { api } from './api';
 
-import { Actions, ActionType, Project, StateType } from './types';
+import { Actions, ActionType, StateType } from './types';
+import { exportProjectScheme, startImportScenario } from './utils';
 
 require('../aristarh');
 
 const initialState = {
     project: {
         name: 'Unnamed',
-        tree: {}
+        tree: []
     },
     user: '',
     control: {
@@ -20,35 +20,6 @@ const initialState = {
         supportPopupShow: false,
     }
 }
-
-// TODO: перенести метод в utils и создать вообще такой файл - цель, сбор хелперов
-async function exportProjectScheme({ name, tree }: Project) {
-    // Сервер еще должен записать это в журнал действий пользователя
-    const { project } = await api.project.export({ name, tree })
-    
-    if (!project) {
-        Aristarh.voice('[exporter]: Project cannot be exported, because server is down.');
-        return;
-    }
-    
-    downloadJSON(project);
-}
-
-async function downloadJSON(json: Record<string, unknown>) {
-    try {
-        const jsonData = JSON.stringify(json, null, 2); 
-    
-        const downloadLink = document.createElement('a');
-        downloadLink.href = `data:application/json;charset=utf-8,${encodeURIComponent(jsonData)}`;
-        downloadLink.download = 'project.json';
-    
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-    } catch (error) {
-        console.error('Ошибка при скачивании данных:', error);
-    }
-}  
 
 // TODO: если все таки понравится Effector, то перейти на его рельсы - иначе распилить тут все на комбайнеры
 const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action) => {
@@ -63,15 +34,24 @@ const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action
                 ...state,
                 name: payload.name
             }
+        case Actions.SET_PROJECT_GLOBALLY:
+            return {
+                ...state,
+                project: {
+                    ...action.payload
+                }
+            }
         case Actions.ADD_TO_TREE:
             let nodePlace = state.project.tree;
 
+            // Path это последовательность шагов, как добраться к ноде.
+            // Если его нет, процесс даже не нужно начинать.
             if (!payload.path) {
                 return state;
             }
 
             for (const node of payload.path) {
-                const currentNode = nodePlace.children?.find(child => child.name == node);
+                const currentNode = nodePlace.children[node];
 
                 if (!currentNode) {
                     return state;
@@ -80,7 +60,9 @@ const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action
                 nodePlace = currentNode;
             }
             
-            nodePlace.children = payload.nodes
+            nodePlace.children = payload.children
+
+            return state;
         case Actions.SET_VISIBLE_MENU_POPUP:
             return {
                 ...state,
@@ -140,6 +122,10 @@ const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action
 
             return state
         
+        case Actions.START_IMPORT_SCENARIO:
+            startImportScenario();
+
+            return state
         default:
             return state;
     }

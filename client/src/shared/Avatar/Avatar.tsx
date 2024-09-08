@@ -6,8 +6,10 @@ import React, {
     useState
 } from 'react';
 
+export type ToolsMenuVarsType = 'common' | 'server' | 'widget' | 'page' | 'cursor' | 'preview' | 'help'
+
 export type ButtonProps = {
-    name: string;
+    name: ToolsMenuVarsType;
     size: number;
     smartRef?: MutableRefObject<HTMLImageElement | null>;
     type: 'svg' | 'png';

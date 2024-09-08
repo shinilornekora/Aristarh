@@ -23,14 +23,18 @@ export enum Actions {
     CHANGE_MOUSE_STATE = 'change-mouse-state',
     OPEN_RIGHT_COLUMN = 'open-right-column',
     OPEN_PAGE_SETTINGS = 'open-page-settins',
-    OPEN_SERVER_SETTINGS = 'open-server-settings'
+    OPEN_SERVER_SETTINGS = 'open-server-settings',
+    SET_PROJECT_GLOBALLY = 'set-project-globally'
 }
 
-export interface Node {
+export interface NodeDataType {
     name?: string;
     component?: JSX.Element;
-    children?: Node[];
+    children?: Node;
 }
+
+// @ts-expect-error: так и надо, это рекурсивный тип
+export type Node = Record<string, Node>
 
 export interface ActionType {
     type: Actions;
@@ -39,12 +43,11 @@ export interface ActionType {
 
 export type ImageEvent = { currentTarget: HTMLImageElement };
 
-export interface Payload {
-    name?: string;
+export interface Payload extends Project {
     cords?: Record<Line, number>
-    nodes?: Node[];
     path?: string[];
     popup?: 'common' | 'server';
+    children?: Node;
 }
 
 export type Project = {
@@ -60,42 +63,6 @@ export interface StateType {
     }
     scenarios: {
         renamingProject: boolean; 
+        supportPopupShow: boolean;
     }
 }
-
-// API part
-
-export type BaseRequest<P, R> = (params: P) => Promise<R>;
-
-export type ProjectSettings = {
-    name: string;
-    tree: Node;
-};
-
-export interface ProjectApi {
-    export: BaseRequest<Record<string, unknown>, { project: ProjectSettings }>;
-    import: BaseRequest<ProjectSettings, Record<string, unknown>>;
-}
-
-export interface Api {
-    project: ProjectApi,
-}
-
-export type ApiEntity = keyof Api;
-
-export type ApiHandler = keyof Api[ApiEntity];
-
-export type ApiHandlerReturnType = Api[ApiEntity][ApiHandler]
-
-export interface ProjectApiBase {
-    export: string;
-    import: string;
-}
-
-export interface ApiBaseType {
-    project: ProjectApiBase
-}
-
-export type ApiBaseEntity = keyof ApiBaseType;
-
-export type ApiBaseHandler = keyof ApiBaseType[ApiBaseEntity];

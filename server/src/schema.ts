@@ -1,6 +1,7 @@
 import { ExportHandler } from "./handlers";
+import { ImportHandler } from "./handlers/import";
 
-export type Endpoints = '/export' | '/ping';
+export type Endpoints = '/export' | '/ping' | '/import';
 export type ApiSchema = Record<Endpoints, Handler>;
 export interface Handler {
     handler: (req: any, res: any) => void;
@@ -10,6 +11,10 @@ export interface Handler {
 export const endpoints: ApiSchema = {
     '/export': {
         handler: ExportHandler, 
+        mode: 'post'
+    },
+    '/import': {
+        handler: ImportHandler,
         mode: 'post'
     },
     '/ping': {

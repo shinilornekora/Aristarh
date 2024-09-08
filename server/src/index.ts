@@ -4,12 +4,12 @@ import { ApiSchema, Endpoints, endpoints } from './schema';
 const app = require('express')();
 const cors = require('cors')();
 const bodyParser = require('body-parser');
-const { expressCspHeader, INLINE, NONE, SELF } = require('express-csp-header');
 
-app.use(cors)
+const { expressCspHeader } = require('express-csp-header');
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+var jsonParser = bodyParser.json()
+
+app.use(cors);
 app.use(expressCspHeader({ 
     policies: { 
         'default-src': [expressCspHeader.NONE], 
@@ -18,7 +18,7 @@ app.use(expressCspHeader({
 }));
 
 app.use((_: any, res: any, next: any) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
@@ -48,7 +48,7 @@ const profiler = ({ mode, handler, handler_call }: Profiler) => {
         handler_call(req, res);
     }
 
-    app[mode](`/api${handler}`, safeCallDecorator)
+    app[mode](`/api${handler}`, jsonParser, safeCallDecorator)
 }
 
 for (const handler of handlers) {

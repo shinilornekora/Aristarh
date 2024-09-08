@@ -1,8 +1,8 @@
-import { Api, ApiBaseHandler, ApiBaseType, ApiEntity, ApiHandlerReturnType } from "./types";
+import { Api, ApiBaseHandler, ApiBaseType, ApiEntity } from "./types";
 
 const SERVER_API_ROUTE = `${removePort(window.location.origin)}:3005/api`;
 
-function removePort(str: string) {
+export function removePort(str: string) {
     const colonIndex = str.lastIndexOf(':');
 
     if (colonIndex === -1) {
@@ -12,7 +12,7 @@ function removePort(str: string) {
     return str.substring(0, colonIndex);
 }
 
-function formatAPI(apis: ApiBaseType): Api {
+export function formatAPI(apis: ApiBaseType): Api {
     const apiEntities = Object.keys(apis) as (ApiEntity)[];
     const apiSchema = {} as Api
 
@@ -34,27 +34,18 @@ function formatAPI(apis: ApiBaseType): Api {
     return apiSchema;
 }
 
-function prepareForApiCall(callPath: string) {
+export function prepareForApiCall(callPath: string) {
     return async (params: Record<string, unknown>) => {
         const callParams = {
             method: 'post',
             body: JSON.stringify({ ...params }),
+            headers: new Headers({'content-type': 'application/json'})
         }
 
-        const response = (await fetch(callPath, callParams) as unknown).json();
+        const response = (await fetch(callPath, callParams)).json();
 
         Aristarh.voice(`Получен ответ с ручки ${callPath}`, response);
 
         return response;
     }
 }
-
-const ApiBase = {
-    project: {
-        export: '/export',
-        import: '/import'
-    }
-}
-
-export const api = formatAPI(ApiBase);
-
