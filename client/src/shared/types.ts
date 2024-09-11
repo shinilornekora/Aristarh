@@ -22,6 +22,8 @@ export enum Actions {
     START_EXPORT_PROJECT_SCENARIO = 'start-export-project-scenario',
     CHANGE_MOUSE_STATE = 'change-mouse-state',
     OPEN_RIGHT_COLUMN = 'open-right-column',
+    OPEN_LEFT_COLUMN = 'open-left-column',
+    CLOSE_LEFT_COLUMN = 'close-left-column',
     OPEN_PAGE_SETTINGS = 'open-page-settins',
     OPEN_SERVER_SETTINGS = 'open-server-settings',
     SET_PROJECT_GLOBALLY = 'set-project-globally'
@@ -64,5 +66,6 @@ export interface StateType {
     scenarios: {
         renamingProject: boolean; 
         supportPopupShow: boolean;
+        isLeftColumnVisible: boolean;
     }
 }

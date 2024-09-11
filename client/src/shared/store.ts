@@ -18,6 +18,7 @@ const initialState = {
     scenarios: {
         renamingProject: false,
         supportPopupShow: false,
+        isLeftColumnVisible: false,
     }
 }
 
@@ -126,6 +127,15 @@ const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action
             startImportScenario();
 
             return state
+        
+        case Actions.OPEN_LEFT_COLUMN:
+            return {
+                ...state,
+                scenarios: {
+                    ...state.scenarios,
+                    isLeftColumnVisible:true
+                }
+            }
         default:
             return state;
     }
