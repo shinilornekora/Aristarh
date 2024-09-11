@@ -18,6 +18,8 @@ const initialState = {
     scenarios: {
         renamingProject: false,
         supportPopupShow: false,
+        showRightColumn: false,
+        showLeftColumn: true,
     }
 }
 
@@ -34,6 +36,7 @@ const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action
                 ...state,
                 name: payload.name
             }
+<<<<<<< HEAD
         case Actions.SET_PROJECT_GLOBALLY:
             return {
                 ...state,
@@ -41,6 +44,44 @@ const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action
                     ...action.payload
                 }
             }
+=======
+        case Actions.OPEN_RIGHT_COLUMN: {
+            return {
+                ...state,
+                scenarios: {
+                    ...state.scenarios,
+                    showRightColumn: true
+                }
+            }
+        }
+        case Actions.CLOSE_RIGHT_COLUMN: {
+            return {
+                ...state,
+                scenarios: {
+                    ...state.scenarios,
+                    showRightColumn: false
+                }
+            }
+        }
+        case Actions.OPEN_LEFT_COLUMN: {
+            return {
+                ...state,
+                scenarios: {
+                    ...state.scenarios,
+                    showLeftColumn: true
+                }
+            }
+        }
+        case Actions.CLOSE_LEFT_COLUMN: {
+            return {
+                ...state,
+                scenarios: {
+                    ...state.scenarios,
+                    showLeftColumn: false
+                }
+            }
+        }
+>>>>>>> 9efc810 ([ADD] Left column folder and actions in the store)
         case Actions.ADD_TO_TREE:
             let nodePlace = state.project.tree;
 

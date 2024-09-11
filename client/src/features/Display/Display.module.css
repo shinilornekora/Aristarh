@@ -1,9 +1,9 @@
 .layout {
     display: flex;
-    position: absolute;
     border: 3px solid rgb(255, 0, 0);
     border-radius: 15px;
     background-color: rgb(136, 136, 136);
     width: 336px;
-    height: calc(100% - 150px);
+    min-height: 200px;
+    height: 70%;
 }
