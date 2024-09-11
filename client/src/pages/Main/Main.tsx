@@ -8,11 +8,9 @@ import { Constructor } from "../../widgets/Constructor";
 import * as css from './Main.module.css';
 import { ConfirmTextPopup } from "../../shared/ConfirmPopup/ConfirmTextPopup";
 import { Actions, StateType } from "../../shared/types";
-<<<<<<< HEAD
+
 import { SupportPopup } from "../../shared/SupportPopup";
-=======
 import { LeftColumn } from "../../widgets/LeftColumn";
->>>>>>> 9efc810 ([ADD] Left column folder and actions in the store)
 
 // TODO: вытащить отсюда процессы в мета-компонент и замонтировать сюда
 export const Main = () => {

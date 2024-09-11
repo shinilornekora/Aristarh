@@ -36,7 +36,6 @@ const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action
                 ...state,
                 name: payload.name
             }
-<<<<<<< HEAD
         case Actions.SET_PROJECT_GLOBALLY:
             return {
                 ...state,
@@ -44,7 +43,6 @@ const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action
                     ...action.payload
                 }
             }
-=======
         case Actions.OPEN_RIGHT_COLUMN: {
             return {
                 ...state,
@@ -81,7 +79,6 @@ const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action
                 }
             }
         }
->>>>>>> 9efc810 ([ADD] Left column folder and actions in the store)
         case Actions.ADD_TO_TREE:
             let nodePlace = state.project.tree;
 
