@@ -65,6 +65,7 @@ export interface StateType {
         activePopup?: DropdownsType;
     }
     scenarios: {
+<<<<<<< HEAD
         renamingProject: boolean; 
 <<<<<<< HEAD
         supportPopupShow: boolean;
@@ -73,5 +74,11 @@ export interface StateType {
         showRightColumn: boolean,
         showLeftColumn: boolean,
 >>>>>>> 9efc810 ([ADD] Left column folder and actions in the store)
+=======
+        renamingProject: boolean,
+        supportPopupShow: boolean,
+        showRightColumn: boolean,
+        showLeftColumn: boolean,
+>>>>>>> 4ec11c8 ([FIX]: stage filse for rebase)
     }
 }

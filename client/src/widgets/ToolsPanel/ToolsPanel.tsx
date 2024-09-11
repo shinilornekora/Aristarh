@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux";
 
-import { Avatar, ButtonProps } from "../../shared/Avatar";
+import { Avatar } from "../../shared/Avatar";
 import { menuButtons } from "./buttons";
 import { dropdowns } from "./popup";
 
@@ -33,22 +33,6 @@ export const ToolsPanel = () => {
         })
     }, []);
 
-    const buttonProcess = useCallback((props: ButtonProps) => {
-        const pseudoSection = dropdowns[props.name];
-        const propsToInject = {
-            smartRef: ref,
-            onClick: handleToolClick,
-            key: props.name,
-            ...props
-        };
-
-        if (pseudoSection.length === 1 && pseudoSection[0].instant) {
-            propsToInject.onClick = pseudoSection[0].handler;
-        }
-
-        return <Avatar { ...propsToInject } />
-    }, []);
-
     const additionals = useMemo(() => ({
         extraCloseCheck: ({ currentTarget }: ImageEvent) => menuButtons.some(button => currentTarget.alt === button.name),
     }), [currentPopup])
@@ -61,7 +45,18 @@ export const ToolsPanel = () => {
                 </div>
             </div>
             <div className={ css.buttons }>
-                { menuButtons.map(buttonProcess) }
+                {
+                    menuButtons.map(
+                        props => (
+                            <Avatar
+                                smartRef={ ref }
+                                onClick={ handleToolClick }
+                                key={ props.name }
+                                { ...props }
+                            />
+                        )
+                    )
+                }
             </div>
             {
                 currentPopup && <Dropdown

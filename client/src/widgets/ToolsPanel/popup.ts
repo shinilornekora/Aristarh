@@ -57,7 +57,7 @@ export const dropdowns: DropdownProps = {
     'widget': [
         {
             name: 'Show widget',
-            handler: () => store.dispatch({ type: Actions.OPEN_RIGHT_COLUMN }),
+            handler: () => store.dispatch({ type: Actions.OPEN_LEFT_COLUMN }),
             instant: true
         }
     ],
