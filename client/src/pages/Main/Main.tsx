@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { ToolsPanel } from "../../widgets/ToolsPanel";
@@ -10,7 +10,7 @@ import { Actions, StateType } from "../../shared/types";
 import { SupportPopup } from "../../shared/SupportPopup";
 import { LeftColumn } from "../../widgets/LeftColumn";
 
-// TODO: вытащить отсюда процессы в мета-компонент и замонтировать сюда
+// TODO: вытащить сценарии в скрипт-компонент и замаунтить здесь.
 export const Main = () => {
     const isRenamingScenario = useSelector<StateType, boolean>(state => state.scenarios.renamingProject);
     const isSupportPopupScenario = useSelector<StateType, boolean>(state => state.scenarios.supportPopupShow);
@@ -23,23 +23,25 @@ export const Main = () => {
         payload: { name: payload } 
     }), [])
 
+    const RenameProjectPopup = useMemo(() => {
+        return () => (
+            <ConfirmTextPopup 
+                text="New project name..."
+                cb={ handleRenamingProcess }
+                inputId="rename_project"
+                cannotBeEmpty
+            />
+        );
+    }, [handleRenamingProcess]);
+
     return (
         <>
-            <div className={css.layout}>
+            <div className={ css.layout }>
                 <ToolsPanel />
                 <Constructor />
-                { isLeftColumnVisible && <LeftColumn /> }
-                {
-                    isRenamingScenario && <ConfirmTextPopup 
-                        text="New project name..."
-                        cb={ handleRenamingProcess }
-                        inputId="rename_project"
-                        cannotBeEmpty
-                    />
-                }
-                {
-                    isSupportPopupScenario && <SupportPopup />
-                }
+                <LeftColumn />
+                { isSupportPopupScenario && <SupportPopup /> }
+                { isRenamingScenario && <RenameProjectPopup /> }
             </div>
         </>
     );
