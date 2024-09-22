@@ -1,3 +1,5 @@
+import { TabType } from "../widgets/RightColumn/components/Tabs/Tabs";
+
 export type DropdownsType = 'common' | 'server' | 'cursor' | 'page' | 'widget' | 'preview' | 'help' | undefined;
 
 export type Line = 'x' | 'y';
@@ -11,6 +13,7 @@ export enum Actions {
     START_DND_SCENARIO = 'start-dnd-scenario',
     END_DND_SCENARIO = 'end-dnd-scenario',
     SET_VISIBLE_MENU_POPUP = 'set-visible-popup',
+    SET_RIGHT_COLUMN_TAB = 'set-right-column-tab',
     START_RENAMING_POPUP_SCENARIO = 'start-renaming-popup-scenario',
     END_RENAMING_POPUP_SCENARIO = 'end-renaming-popup-scenario',
     START_SUPPORT_POPUP_SCENARIO = 'start-support-popup-scenario',
@@ -53,6 +56,7 @@ export interface Payload extends Project {
     popup?: 'common' | 'server';
     children?: Node;
     targetElementId?: string;
+    tab?: TabType;
 }
 
 export type Project = {
@@ -65,6 +69,7 @@ export interface StateType {
     user: string;
     control: {
         activePopup?: DropdownsType;
+        rightColumnActiveTab?: TabType;
         targetElementId?: string;
     }
     scenarios: {

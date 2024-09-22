@@ -18,7 +18,6 @@ import { RightColumn } from "../../widgets/RightColumn";
 export const Main = () => {
     const isRenamingScenario = useSelector<StateType, boolean>(state => state.scenarios.renamingProject);
     const isSupportPopupScenario = useSelector<StateType, boolean>(state => state.scenarios.supportPopupShow);
-    const targetElementId = useSelector<StateType, string | undefined>(state => state.control.targetElementId);
 
     const dispatch = useDispatch();
 
@@ -44,7 +43,7 @@ export const Main = () => {
                 <ToolsPanel />
                 <Constructor />
                 <LeftColumn />
-                { targetElementId && <RightColumn /> }
+                <RightColumn />
                 { isSupportPopupScenario && <SupportPopup /> }
                 { isRenamingScenario && <RenameProjectPopup /> }
             </div>

@@ -13,6 +13,7 @@ const initialState = {
     user: '',
     control: {
         activePopup: undefined,
+        rightColumnActiveTab: undefined,
         targetElementId: '',
         mouse: ''
     },
@@ -35,6 +36,14 @@ const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action
             return {
                 ...state,
                 name: payload.name
+            }
+        case Actions.SET_RIGHT_COLUMN_TAB:
+            return {
+                ...state,
+                control: {
+                    ...state.control,
+                    rightColumnActiveTab: action.payload.tab
+                }
             }
         case Actions.SET_PROJECT_GLOBALLY:
             return {
