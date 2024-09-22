@@ -1,6 +1,6 @@
 import { WidgetMenuVarsType } from "../../shared/Avatar";
 
-interface WidgetButtonsType {
+export interface WidgetButtonsType {
     name: WidgetMenuVarsType;
     size: number;
     type: 'svg' | 'png';

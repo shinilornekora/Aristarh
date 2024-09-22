@@ -6,12 +6,12 @@ import * as css from '../Settings.module.css';
 export const BasicStyles = () => {
     return (
         <div className={ css.baseSettings }>
-            <SettingsInputField name="width" />
-            <SettingsInputField name="height" />
-            <SettingsInputField name="offsetX" />
-            <SettingsInputField name="offsetY" />
-            <SettingsInputField name="background-color" />
-            <SettingsInputField name="border-radius" />
+            <SettingsInputField name="width" meta="W"/>
+            <SettingsInputField name="height" meta="H"/>
+            <SettingsInputField name="offsetX" meta="X"/>
+            <SettingsInputField name="offsetY" meta="Y"/>
+            <SettingsInputField name="background-color" meta="Fill"/>
+            <SettingsInputField name="rotate-angle" meta="R"/>
         </div>
     );
 }

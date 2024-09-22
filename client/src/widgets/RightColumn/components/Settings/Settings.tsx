@@ -27,7 +27,7 @@ export const Settings: React.FC = () => {
             default:
                 return null;
         }
-    }, [])
+    }, [selectedTab]);
 
     return (
         <div className={ css.settings }>
