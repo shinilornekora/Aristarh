@@ -13,10 +13,11 @@
 .inactive {
     opacity: 0;
     width: 0;
+    right: 0;
 }
 
 .active {
     right: 10px;
     opacity: .95;
-    width: 500px;
+    width: 340px;
 }
