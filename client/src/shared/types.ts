@@ -3,11 +3,12 @@ export type DropdownsType = 'common' | 'server' | 'cursor' | 'page' | 'widget' |
 export type Line = 'x' | 'y';
 
 export enum Actions {
+    ADD_TO_TREE = 'add-to-tree',
+    CHANGE_CORDS = 'change-cords',
     CREATE_PROJECT = 'create-project',
     RENAME_PROJECT = 'rename-project',
-    ADD_TO_TREE = 'add-to-tree',
     REMOVE_FROM_TREE = 'remove-from-tree',
-    CHANGE_CORDS = 'change-cords',
+    START_DND_SCENARIO = 'start-dnd-scenario',
     SET_VISIBLE_MENU_POPUP = 'set-visible-popup',
     START_RENAMING_POPUP_SCENARIO = 'start-renaming-popup-scenario',
     END_RENAMING_POPUP_SCENARIO = 'end-renaming-popup-scenario',
@@ -62,6 +63,7 @@ export interface StateType {
     user: string;
     control: {
         activePopup?: DropdownsType;
+        targetElementId?: string;
     }
     scenarios: {
         renamingProject: boolean; 

@@ -81,6 +81,9 @@ const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action
                 }
             }
         }
+        case Actions.START_DND_SCENARIO: {
+            
+        }
         case Actions.END_RENAMING_POPUP_SCENARIO: {
             return {
                 ...state,

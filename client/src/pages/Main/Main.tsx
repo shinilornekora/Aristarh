@@ -9,12 +9,13 @@ import { ConfirmTextPopup } from "../../shared/ConfirmPopup/ConfirmTextPopup";
 import { Actions, StateType } from "../../shared/types";
 import { SupportPopup } from "../../shared/SupportPopup";
 import { LeftColumn } from "../../widgets/LeftColumn";
+import { RightColumn } from "../../widgets/RightColumn";
 
 // TODO: вытащить сценарии в скрипт-компонент и замаунтить здесь.
 export const Main = () => {
     const isRenamingScenario = useSelector<StateType, boolean>(state => state.scenarios.renamingProject);
     const isSupportPopupScenario = useSelector<StateType, boolean>(state => state.scenarios.supportPopupShow);
-    const isLeftColumnVisible = useSelector<StateType, boolean>(state => state.scenarios.isLeftColumnVisible)
+    const targetElementId = useSelector<StateType, string | undefined>(state => state.control.targetElementId);
 
     const dispatch = useDispatch();
 
@@ -40,6 +41,7 @@ export const Main = () => {
                 <ToolsPanel />
                 <Constructor />
                 <LeftColumn />
+                { targetElementId && <RightColumn /> }
                 { isSupportPopupScenario && <SupportPopup /> }
                 { isRenamingScenario && <RenameProjectPopup /> }
             </div>

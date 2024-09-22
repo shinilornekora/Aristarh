@@ -1,0 +1,9 @@
+.tabs {
+    display: flex;
+    flex-direction: column;
+}
+
+.tab {
+    padding: 2px 15px;
+    border-top: 2px solid white;
+}

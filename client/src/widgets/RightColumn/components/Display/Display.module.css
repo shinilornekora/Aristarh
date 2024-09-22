@@ -1,0 +1,11 @@
+.display {
+    min-height: 200px;
+    min-width: 90%;
+    outline: 2px solid #000;
+}
+
+.innerDisplay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

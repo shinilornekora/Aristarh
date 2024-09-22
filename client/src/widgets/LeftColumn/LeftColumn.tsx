@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Actions, StateType } from "../../shared/types";
 
 import * as css from './LeftColumn.module.css'
+import { actions } from "./actions";
 
 export const LeftColumn = () => {
     const dispatch = useDispatch();
@@ -20,14 +21,16 @@ export const LeftColumn = () => {
     const [canShowColumn, setColumnState] = useState<boolean>(isVisible);
 
     const Widgets = useMemo(() => {
-        return widgetButtons.map(config => 
-            <Avatar 
-                key={ config.name }
-                onClick={ () => {} } 
-                className={ css.pic }
-                { ...config } 
-            />
-        )
+        return widgetButtons.map(config => {
+            return (
+                <Avatar 
+                    key={ config.name }
+                    onClick={ actions[config.name] } 
+                    className={ css.pic }
+                    { ...config } 
+                />
+            )
+        })
     }, [widgetButtons]);
 
     useEffect(() => {
