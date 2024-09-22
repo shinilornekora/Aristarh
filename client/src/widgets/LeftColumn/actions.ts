@@ -11,7 +11,7 @@ function callRightColumn(id: string) {
     store.dispatch({
         type: Actions.START_DND_SCENARIO,
         payload: {
-            id: MAYBE_WIDGET_ID
+            targetElementId: MAYBE_WIDGET_ID
         }
     })  
 }

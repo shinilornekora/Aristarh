@@ -16,7 +16,11 @@ const tabsList: Array<TabType> = ['basic', 'visibility', 'actions', 'accommodati
 export const Tabs: React.FC<Props> = ({ onSelect }) => {
     const RenderTabs = useCallback(() => {
         return tabsList.map(tab => (
-            <Tab tabName={ tab } onSelect={ onSelect }/>
+            <Tab 
+                key={ tab } 
+                tabName={ tab } 
+                onSelect={ onSelect }
+            />
         ));
     }, [onSelect]);
 

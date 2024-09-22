@@ -25,7 +25,7 @@ export const LeftColumn = () => {
             return (
                 <Avatar 
                     key={ config.name }
-                    onClick={ actions[config.name] } 
+                    onClick={ actions[config.name].handler } 
                     className={ css.pic }
                     { ...config } 
                 />
@@ -50,7 +50,7 @@ export const LeftColumn = () => {
         <div className={ 
             cn(css.container, {
                 [css.show]: canShowColumn
-            }) 
+            }, 'qa-LeftColumn') 
         }>
             <div className={ css.content }>
                 { Widgets }

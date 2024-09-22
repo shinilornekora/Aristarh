@@ -1,4 +1,7 @@
 import React, { useCallback, useMemo } from "react";
+
+import cn from 'classnames';
+
 import { useDispatch, useSelector } from "react-redux";
 
 import { ToolsPanel } from "../../widgets/ToolsPanel";
@@ -37,7 +40,7 @@ export const Main = () => {
 
     return (
         <>
-            <div className={ css.layout }>
+            <div className={ cn(css.layout, 'qa-MainPage') }>
                 <ToolsPanel />
                 <Constructor />
                 <LeftColumn />

@@ -9,6 +9,7 @@ export enum Actions {
     RENAME_PROJECT = 'rename-project',
     REMOVE_FROM_TREE = 'remove-from-tree',
     START_DND_SCENARIO = 'start-dnd-scenario',
+    END_DND_SCENARIO = 'end-dnd-scenario',
     SET_VISIBLE_MENU_POPUP = 'set-visible-popup',
     START_RENAMING_POPUP_SCENARIO = 'start-renaming-popup-scenario',
     END_RENAMING_POPUP_SCENARIO = 'end-renaming-popup-scenario',
@@ -51,6 +52,7 @@ export interface Payload extends Project {
     path?: string[];
     popup?: 'common' | 'server';
     children?: Node;
+    targetElementId?: string;
 }
 
 export type Project = {

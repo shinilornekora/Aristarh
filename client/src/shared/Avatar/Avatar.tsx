@@ -6,6 +6,8 @@ import React, {
     useState
 } from 'react';
 
+import cn from 'classnames';
+
 export type ToolsMenuVarsType = 'common' | 'server' | 'widget' | 'page' | 'cursor' | 'preview' | 'help';
 export type WidgetMenuVarsType = 'button' | 'text' | 'line' | 'square' | 'triangle' | 'circle' | 'star';
 
@@ -52,7 +54,7 @@ export const Avatar: React.FC<ButtonProps> = ({ onClick, className, name, size, 
     return (
         <img
             onClick={ handleClick }
-            className={ className }
+            className={ cn(className, `qa-Avatar-${name}`) }
             src={ img }
             ref={ self }
             width={ size }

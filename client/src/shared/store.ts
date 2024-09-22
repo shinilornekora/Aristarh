@@ -13,6 +13,7 @@ const initialState = {
     user: '',
     control: {
         activePopup: undefined,
+        targetElementId: '',
         mouse: ''
     },
     scenarios: {
@@ -82,7 +83,27 @@ const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action
             }
         }
         case Actions.START_DND_SCENARIO: {
-            
+            return {
+                ...state,
+                control: {
+                    ...state.control,
+                    targetElementId: action.payload.targetElementId,
+                }
+            }
+        }
+        case Actions.END_DND_SCENARIO: {
+            dispatcher(state, {
+                type: Actions.ADD_TO_TREE,
+                payload: action.payload,
+            });
+
+            return {
+                ...state,
+                control: {
+                    ...state.control,
+                    targetElementId: '',
+                }
+            }
         }
         case Actions.END_RENAMING_POPUP_SCENARIO: {
             return {
@@ -136,7 +157,7 @@ const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action
                 ...state,
                 scenarios: {
                     ...state.scenarios,
-                    isLeftColumnVisible:true
+                    isLeftColumnVisible: true
                 }
             }
         default:

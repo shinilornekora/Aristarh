@@ -1,8 +1,20 @@
-import React, {MutableRefObject, useCallback, useEffect, useRef, useState, memo, useMemo, CSSProperties} from 'react';
+import React, {
+    MutableRefObject, 
+    useCallback, 
+    useEffect, 
+    useRef, 
+    useState, 
+    memo, 
+    useMemo, 
+    CSSProperties
+} from 'react';
+
+import cn from 'classnames';
+
+import { OptionList } from './OptionList';
 
 import * as css from './Dropdown.module.css';
-import { OptionList } from './OptionList';
-import { ImageEvent } from '../../widgets/ToolsPanel';
+import { ImageEvent } from '../types';
 
 export interface DropdownOption {
     name: string;
@@ -91,7 +103,7 @@ export const Dropdown: React.FC<Props> = memo(({ options, onClose, smartRef, add
     
     return (
          <div
-            className={ css.container }
+            className={ cn(css.container, 'qa-Dropdown') }
             style={ _posStyles }
             id="dropdown-popup"
             ref={ ref }

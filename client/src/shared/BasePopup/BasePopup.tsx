@@ -1,4 +1,4 @@
-import React, { useMemo, memo, useRef, useEffect } from 'react';
+import React, { memo, useRef, useEffect } from 'react';
 
 import * as css from './BasePopup.module.css';
 import cn from 'classnames';
@@ -37,14 +37,16 @@ export const BasePopup: React.FC<Props> = memo(({ size, children, onClose }) => 
     }, []);
   
     return (
-        <div className={css.outer}>
+        <div className={ cn(css.outer, 'qa-BasePopup') }>
             <div
-                ref={popupRef}
-                className={cn(css.popup, {
-                    [css.small_v]: size === 'small',
-                    [css.medium_v]: size === 'medium',
-                    [css.large_v]: size === 'large',
-                })}
+                ref={ popupRef }
+                className={ 
+                    cn(css.popup, {
+                        [css.small_v]: size === 'small',
+                        [css.medium_v]: size === 'medium',
+                        [css.large_v]: size === 'large',
+                    }) 
+                }
             >
                 <PopupContent />
             </div>
