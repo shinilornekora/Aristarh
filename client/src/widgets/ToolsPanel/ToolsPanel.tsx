@@ -1,7 +1,9 @@
 import React, { useCallback, useMemo, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux";
 
-import { Avatar, ButtonProps } from "../../shared/Avatar";
+import cn from 'classnames';
+
+import { Avatar, ButtonProps, ToolsMenuVarsType } from "../../shared/Avatar";
 import { menuButtons } from "./buttons";
 import { dropdowns } from "./popup";
 
@@ -34,7 +36,7 @@ export const ToolsPanel = () => {
     }, []);
 
     const buttonProcess = useCallback((props: ButtonProps) => {
-        const pseudoSection = dropdowns[props.name];
+        const pseudoSection = dropdowns[props.name as ToolsMenuVarsType];
         const propsToInject = {
             smartRef: ref,
             onClick: handleToolClick,
@@ -54,7 +56,7 @@ export const ToolsPanel = () => {
     }), [currentPopup])
 
     return (
-        <div className={ css.container }>
+        <div className={ cn(css.container, 'qa-ToolsPanel') }>
             <div className={ css.project }>
                 <div className={ css.text }>
                     { name }

@@ -13,11 +13,14 @@ const initialState = {
     user: '',
     control: {
         activePopup: undefined,
+        rightColumnActiveTab: undefined,
+        targetElementId: '',
         mouse: ''
     },
     scenarios: {
         renamingProject: false,
         supportPopupShow: false,
+        isLeftColumnVisible: false,
     }
 }
 
@@ -33,6 +36,14 @@ const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action
             return {
                 ...state,
                 name: payload.name
+            }
+        case Actions.SET_RIGHT_COLUMN_TAB:
+            return {
+                ...state,
+                control: {
+                    ...state.control,
+                    rightColumnActiveTab: action.payload.tab
+                }
             }
         case Actions.SET_PROJECT_GLOBALLY:
             return {
@@ -77,6 +88,29 @@ const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action
                 scenarios: {
                     ...state.scenarios,
                     renamingProject: true,
+                }
+            }
+        }
+        case Actions.START_DND_SCENARIO: {
+            return {
+                ...state,
+                control: {
+                    ...state.control,
+                    targetElementId: action.payload.targetElementId,
+                }
+            }
+        }
+        case Actions.END_DND_SCENARIO: {
+            dispatcher(state, {
+                type: Actions.ADD_TO_TREE,
+                payload: action.payload,
+            });
+
+            return {
+                ...state,
+                control: {
+                    ...state.control,
+                    targetElementId: '',
                 }
             }
         }
@@ -126,6 +160,15 @@ const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action
             startImportScenario();
 
             return state
+        
+        case Actions.OPEN_LEFT_COLUMN:
+            return {
+                ...state,
+                scenarios: {
+                    ...state.scenarios,
+                    isLeftColumnVisible: true
+                }
+            }
         default:
             return state;
     }

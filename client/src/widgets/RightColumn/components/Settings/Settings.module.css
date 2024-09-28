@@ -1,0 +1,44 @@
+.settings {
+    height: 100%;
+    width: 100%;
+    padding: 23px 36px;
+    font-family: 'Inria Sans', sans-serif;
+    font-size: 24px;
+}
+
+.inputContainer {
+    display: block;
+    max-height: 30px;
+    max-width: 110px;
+}
+
+.baseSettings {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 36px;
+}
+
+.settingsInput {
+    display: block;
+    background-color: rgba(50, 48, 48, 0);
+    border: 0px;
+    border-bottom: 2px solid #d9d9d9;
+    min-height: 30px;
+    max-width: 110px;
+    padding-left: 50px;
+    font-size: 20px;
+    color: #d9d9d9;
+}
+
+.settingsInput:active, .settingsInput:focus-visible {
+    border: 0px;
+    border-bottom: 2px solid #d9d9d9;
+    outline: none;
+}
+
+.settingsLabel {
+    position: absolute;
+    color: #d9d9d9;
+}
