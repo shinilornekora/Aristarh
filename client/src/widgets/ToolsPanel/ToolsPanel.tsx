@@ -1,7 +1,9 @@
 import React, { useCallback, useMemo, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux";
 
-import { Avatar } from "../../shared/Avatar";
+import cn from 'classnames';
+
+import { Avatar, ButtonProps, ToolsMenuVarsType } from "../../shared/Avatar";
 import { menuButtons } from "./buttons";
 import { dropdowns } from "./popup";
 
@@ -33,30 +35,35 @@ export const ToolsPanel = () => {
         })
     }, []);
 
+    const buttonProcess = useCallback((props: ButtonProps) => {
+        const pseudoSection = dropdowns[props.name as ToolsMenuVarsType];
+        const propsToInject = {
+            smartRef: ref,
+            onClick: handleToolClick,
+            key: props.name,
+            ...props
+        };
+
+        if (pseudoSection.length === 1 && pseudoSection[0].instant) {
+            propsToInject.onClick = pseudoSection[0].handler;
+        }
+
+        return <Avatar { ...propsToInject } />
+    }, []);
+
     const additionals = useMemo(() => ({
         extraCloseCheck: ({ currentTarget }: ImageEvent) => menuButtons.some(button => currentTarget.alt === button.name),
     }), [currentPopup])
 
     return (
-        <div className={ css.container }>
+        <div className={ cn(css.container, 'qa-ToolsPanel') }>
             <div className={ css.project }>
                 <div className={ css.text }>
                     { name }
                 </div>
             </div>
             <div className={ css.buttons }>
-                {
-                    menuButtons.map(
-                        props => (
-                            <Avatar
-                                smartRef={ ref }
-                                onClick={ handleToolClick }
-                                key={ props.name }
-                                { ...props }
-                            />
-                        )
-                    )
-                }
+                { menuButtons.map(buttonProcess) }
             </div>
             {
                 currentPopup && <Dropdown

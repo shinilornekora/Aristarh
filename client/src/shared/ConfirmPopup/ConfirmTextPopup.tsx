@@ -43,20 +43,23 @@ export const ConfirmTextPopup: React.FC<Props> = ({ text, inputId, cb, cannotBeE
     
     return (
         <BasePopup size="large">
-            <form className={ css.form } onSubmit={ onConfirm }>
+            <form 
+                className={ cn(css.form, 'qa-Confirm-Popup') } 
+                onSubmit={ onConfirm }
+            >
                 <section className={ css.popupText }>
-                    <label className={ css.text } htmlFor={ inputId }>{ text }</label>
                     <input 
                         ref={ inputRef }
                         className={ cn(css.input, {
                             [css.error]: Boolean(errorText)
                         }) }
                         id={ inputId }
+                        placeholder={ text }
                         type="text" 
                     />
                     <p className={ css.errorText}>{errorText}</p>
                 </section>
-                <button className={ css.button } type="submit">Confirm</button>
+                <button className={ css.button } type="submit">Save</button>
             </form>
         </BasePopup>
     )

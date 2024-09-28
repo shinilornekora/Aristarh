@@ -1,8 +1,8 @@
-import { Api, ApiBaseHandler, ApiBaseType, ApiEntity, ApiHandlerReturnType } from "./types";
+import { Api, ApiBaseHandler, ApiBaseType, ApiEntity } from "./types";
 
 const SERVER_API_ROUTE = `${removePort(window.location.origin)}:3005/api`;
 
-function removePort(str: string) {
+export function removePort(str: string) {
     const colonIndex = str.lastIndexOf(':');
 
     if (colonIndex === -1) {
@@ -12,7 +12,7 @@ function removePort(str: string) {
     return str.substring(0, colonIndex);
 }
 
-function formatAPI(apis: ApiBaseType): Api {
+export function formatAPI(apis: ApiBaseType): Api {
     const apiEntities = Object.keys(apis) as (ApiEntity)[];
     const apiSchema = {} as Api
 
@@ -27,23 +27,25 @@ function formatAPI(apis: ApiBaseType): Api {
 
             // TODO: индексация хочет быть через И, я же хочу чтобы она была через ИЛИ.
             // @ts-expect-error: сложные типы
-            apiSchema[entity][key] = prepareForApiCall(`${SERVER_API_ROUTE}${path}`) as Partial<ApiHandlerReturnType>
+            apiSchema[entity][key] = prepareForApiCall(`${SERVER_API_ROUTE}${path}/`) as Partial<ApiHandlerReturnType>
         })
     }
 
     return apiSchema;
 }
 
-function prepareForApiCall(callPath: string) {
-    return async (params: Record<string, unknown>) => await fetch(callPath, params) as unknown
-}
+export function prepareForApiCall(callPath: string) {
+    return async (params: Record<string, unknown>) => {
+        const callParams = {
+            method: 'post',
+            body: JSON.stringify({ ...params }),
+            headers: new Headers({'content-type': 'application/json'})
+        }
 
-const ApiBase = {
-    project: {
-        export: '/export',
-        import: '/import'
+        const response = (await fetch(callPath, callParams)).json();
+
+        Aristarh.voice(`Получен ответ с ручки ${callPath}`, response);
+
+        return response;
     }
 }
-
-export const api = formatAPI(ApiBase);
-

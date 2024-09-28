@@ -1,12 +1,27 @@
 .container {
-    display: none;
-    position: absolute;
-    right: -500px;
+    display: flex;
+    transition: 100ms;
     flex-direction: column;
-    background-color: rgb(136, 136, 136);
-    width: 500px;
+    position: absolute;
+    background-color: #323030;
     height: calc(100% - 40px);
     margin-top: 20px;
     border-radius: 15px;
-    opacity: .8;
+    outline: 2px solid #000;
+}
+
+.inactive {
+    position: absolute;
+    right: 0;
+    opacity: 0;
+}
+
+.inactive * {
+    width: 0;
+}
+
+.active {
+    right: 10px;
+    opacity: .95;
+    width: 340px;
 }

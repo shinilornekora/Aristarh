@@ -1,5 +1,14 @@
+import { ToolsMenuVarsType } from '../../shared/Avatar';
 import { store } from '../../shared/store';
 import { Actions } from '../../shared/types';
+
+interface DropdownMenuProp {
+    name: string;
+    handler: () => void;
+    instant?: boolean;
+}
+
+type DropdownProps = Record<ToolsMenuVarsType, DropdownMenuProp[]>
 
 /**
  * Так, тут стоит понять что handler по сути только и должен запускать диспатчи
@@ -8,7 +17,7 @@ import { Actions } from '../../shared/types';
  * 
  * TODO: некоторые из кнопок должны быть без дропдауна, добавить условие instant
  */
-export const dropdowns = {
+export const dropdowns: DropdownProps = {
     'common': [
         {
             name: 'Import JSON',
@@ -48,19 +57,22 @@ export const dropdowns = {
     'widget': [
         {
             name: 'Show widget',
-            handler: () => store.dispatch({ type: Actions.OPEN_RIGHT_COLUMN })
+            handler: () => store.dispatch({ type: Actions.OPEN_LEFT_COLUMN }),
+            instant: true
         }
     ],
     'page': [
         {
             name: 'Open page settings',
-            handler: () => store.dispatch({ type: Actions.OPEN_PAGE_SETTINGS })
+            handler: () => store.dispatch({ type: Actions.OPEN_PAGE_SETTINGS }),
+            instant: true
         }
     ],
     'server': [
         {
             name: 'Open server settings',
-            handler: () => store.dispatch({ type: Actions.OPEN_SERVER_SETTINGS })
+            handler: () => store.dispatch({ type: Actions.OPEN_SERVER_SETTINGS }),
+            instant: true
         }
     ],
     // Мы обязаны запомнить открытый window, иначе потеряем контроль над превью

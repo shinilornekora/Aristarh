@@ -6,15 +6,23 @@ import React, {
     useState
 } from 'react';
 
+import cn from 'classnames';
+
+export type ToolsMenuVarsType = 'common' | 'server' | 'widget' | 'page' | 'cursor' | 'preview' | 'help';
+export type WidgetMenuVarsType = 'button' | 'text' | 'line' | 'square' | 'triangle' | 'circle' | 'star';
+
+type AvailableAvatars = ToolsMenuVarsType | WidgetMenuVarsType;
+
 export type ButtonProps = {
-    name: string;
+    name: AvailableAvatars;
     size: number;
     smartRef?: MutableRefObject<HTMLImageElement | null>;
+    className?: string;
     type: 'svg' | 'png';
     onClick?: (eventful: unknown) => void;
 }
 
-export const Avatar: React.FC<ButtonProps> = ({ onClick, name, size, type, smartRef }) => {
+export const Avatar: React.FC<ButtonProps> = ({ onClick, className, name, size, type, smartRef }) => {
     const [img, setImg] = useState('');
     const self = useRef(null);
 
@@ -46,6 +54,7 @@ export const Avatar: React.FC<ButtonProps> = ({ onClick, name, size, type, smart
     return (
         <img
             onClick={ handleClick }
+            className={ cn(className, `qa-Avatar-${name}`) }
             src={ img }
             ref={ self }
             width={ size }
