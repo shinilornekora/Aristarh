@@ -1,4 +1,4 @@
-import { store } from "../../shared/store";
+import { store } from "../../shared/store/store";
 import { Actions, WidgetMenuVarsType } from "../../shared/types";
 
 type UnknownEvent = (eventful: unknown) => void;

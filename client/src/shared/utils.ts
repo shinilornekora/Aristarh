@@ -1,7 +1,7 @@
 import { api } from "./api";
 import { Actions, Project } from "./types";
 import { ProjectSettings } from "./api/types";
-import { store } from "./store";
+import { store } from "./store/store";
 
 export async function downloadJSON(json: Record<string, unknown>) {
     try {
