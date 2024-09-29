@@ -3,9 +3,8 @@ import { useSelector } from "react-redux";
 
 import cn from 'classnames';
 
-import { StateType } from "../../../../shared/types";
-import { TabType } from "./Tabs"
-
+import { TabType } from "../../../../shared/types/ui";
+import { StateType } from "../../../../shared/types/store";
 import * as css from './Tabs.module.css';
 
 interface SingleTabType {

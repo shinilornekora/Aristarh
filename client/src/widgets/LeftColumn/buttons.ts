@@ -1,10 +1,4 @@
-import { WidgetMenuVarsType } from "../../shared/Avatar";
-
-export interface WidgetButtonsType {
-    name: WidgetMenuVarsType;
-    size: number;
-    type: 'svg' | 'png';
-}
+import { WidgetButtonsType } from "../../shared/types/ui";
 
 export const widgetButtons: WidgetButtonsType[] = [
     {

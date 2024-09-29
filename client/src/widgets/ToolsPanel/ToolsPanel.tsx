@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 
 import cn from 'classnames';
 
-import { Avatar, ButtonProps, ToolsMenuVarsType } from "../../shared/Avatar";
+import { Avatar } from "../../shared/components/Avatar";
 import { menuButtons } from "./buttons";
 import { dropdowns } from "./popup";
-
-import { Actions, DropdownsType, ImageEvent, StateType } from "../../shared/types";
-import { Dropdown } from "../../shared/Dropdown";
-
+import { Dropdown } from "../../shared/components/Dropdown";
 import * as css from './ToolsPanel.module.css';
+import { Actions, StateType } from "../../shared/types/store";
+import { ButtonProps, DropdownsType, ToolsMenuVarsType } from "../../shared/types/ui";
+import { ImageEvent } from "../../shared/types/event";
 
 export const ToolsPanel = () => {
     const name = useSelector<StateType, string>(state => state.project.name)

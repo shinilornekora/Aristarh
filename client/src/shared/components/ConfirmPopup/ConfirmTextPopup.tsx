@@ -1,11 +1,11 @@
 import React, { FormEvent, useCallback, useRef, useState } from 'react';
-import { BasePopup } from "../BasePopup"
 
 import cn from 'classnames';
 
 import * as css from './ConfirmTextPopup.module.css';
 import { useDispatch } from 'react-redux';
-import { Actions } from '../types';
+import { BasePopup } from '../BasePopup';
+import { Actions } from '../../types/store';
 
 type Props = {
     text: string;

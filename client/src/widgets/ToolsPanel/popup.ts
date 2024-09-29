@@ -1,6 +1,6 @@
-import { ToolsMenuVarsType } from '../../shared/Avatar';
-import { store } from '../../shared/store';
-import { Actions } from '../../shared/types';
+import { store } from '../../shared/store/store';
+import { Actions } from '../../shared/types/store';
+import { ToolsMenuVarsType } from '../../shared/types/ui';
 
 interface DropdownMenuProp {
     name: string;
@@ -14,8 +14,6 @@ type DropdownProps = Record<ToolsMenuVarsType, DropdownMenuProp[]>
  * Так, тут стоит понять что handler по сути только и должен запускать диспатчи
  * Не стоит здесь примешивать какую-то иную логику иначе будет сложно жить
  * Ну и надо бы как-то разнести этот объект
- * 
- * TODO: некоторые из кнопок должны быть без дропдауна, добавить условие instant
  */
 export const dropdowns: DropdownProps = {
     'common': [

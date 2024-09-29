@@ -1,5 +1,3 @@
-import { Node } from "../types";
-
 export type BaseRequest<P, R> = (params: P) => Promise<R>;
 
 export type ProjectSettings = {

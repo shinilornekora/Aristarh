@@ -1,8 +1,4 @@
-import { TabType } from "../widgets/RightColumn/components/Tabs/Tabs";
-
-export type DropdownsType = 'common' | 'server' | 'cursor' | 'page' | 'widget' | 'preview' | 'help' | undefined;
-
-export type Line = 'x' | 'y';
+import { DropdownsType, TabType } from "./ui";
 
 export enum Actions {
     ADD_TO_TREE = 'add-to-tree',
@@ -34,21 +30,32 @@ export enum Actions {
     SET_PROJECT_GLOBALLY = 'set-project-globally'
 }
 
-export interface NodeDataType {
-    name?: string;
-    component?: JSX.Element;
-    children?: Node;
-}
-
-// @ts-expect-error: так и надо, это рекурсивный тип
-export type Node = Record<string, Node>
-
 export interface ActionType {
     type: Actions;
     payload: Payload;
 };
 
-export type ImageEvent = { currentTarget: HTMLImageElement };
+export type Project = {
+    name: string;
+    tree: NexusTreeState;
+}
+
+export interface NexusTreeNode {
+    id: string;
+    name: string;
+    children: NexusTreeNode[];
+    type: string;
+    styles?: Record<string, any>;
+    x: number; // Add x coordinate
+    y: number; // Add y coordinate
+}
+
+
+export interface NexusTreeState {
+    root: NexusTreeNode;
+    selectedNodeId: string | null;
+    expandedNodeIds: string[];
+}
 
 export interface Payload extends Project {
     cords?: Record<Line, number>
@@ -59,10 +66,6 @@ export interface Payload extends Project {
     tab?: TabType;
 }
 
-export type Project = {
-    name: string;
-    tree: Node;
-}
 
 export interface StateType {
     project: Project;
@@ -73,8 +76,10 @@ export interface StateType {
         targetElementId?: string;
     }
     scenarios: {
-        renamingProject: boolean; 
+        renamingProject: boolean;
         supportPopupShow: boolean;
         isLeftColumnVisible: boolean;
     }
 }
+
+export type Line = 'x' | 'y';

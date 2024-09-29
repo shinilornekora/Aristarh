@@ -7,8 +7,8 @@ import { Settings } from "./components/Settings";
 import { Tabs } from "./components/Tabs/Tabs";
 
 import { useSelector } from "react-redux";
-import { StateType } from "../../shared/types";
 
+import { StateType } from "../../shared/types/store";
 import * as css from './RightColumn.module.css';
 
 export const RightColumn = () => {
