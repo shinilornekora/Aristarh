@@ -37,7 +37,24 @@ export interface ActionType {
 
 export type Project = {
     name: string;
-    tree: Node;
+    tree: NexusTreeState;
+}
+
+export interface NexusTreeNode {
+    id: string;
+    name: string;
+    children: NexusTreeNode[];
+    type: string;
+    styles?: Record<string, any>;
+    x: number; // Add x coordinate
+    y: number; // Add y coordinate
+}
+
+
+export interface NexusTreeState {
+    root: NexusTreeNode;
+    selectedNodeId: string | null;
+    expandedNodeIds: string[];
 }
 
 export interface Payload extends Project {
@@ -59,19 +76,10 @@ export interface StateType {
         targetElementId?: string;
     }
     scenarios: {
-        renamingProject: boolean; 
+        renamingProject: boolean;
         supportPopupShow: boolean;
         isLeftColumnVisible: boolean;
     }
 }
 
 export type Line = 'x' | 'y';
-
-export interface NodeDataType {
-    name?: string;
-    component?: JSX.Element;
-    children?: Node;
-}
-
-// @ts-expect-error: так и надо, это рекурсивный тип
-export type Node = Record<string, Node>

@@ -1,19 +1,16 @@
 import React from 'react';
 import { Draggable } from '@hello-pangea/dnd';
-import { actions } from '../LeftColumn/actions';
-import { Avatar } from '../../shared/components/Avatar';
+import { NexusTreeNode } from '../../shared/types/store';
 
-import * as css from '../LeftColumn/LeftColumn.module.css';
-import { WidgetButtonsType } from '../../shared/types/ui';
 
 type Props = {
-    config: WidgetButtonsType;
+    config: NexusTreeNode;
     index: number;
 };
 
 export const Widget: React.FC<Props> = ({ config, index }) => {
     return (
-        <Draggable draggableId={config.name} index={index}>
+        <Draggable draggableId={config.id} index={index}>
             {(provided) => (
                 <div
                     {...provided.draggableProps}
@@ -23,11 +20,7 @@ export const Widget: React.FC<Props> = ({ config, index }) => {
                         backgroundColor: 'white',
                     }}
                 >
-                    <Avatar
-                        onClick={actions[config.name].handler}  
-                        className={css.pic}
-                        {...config}
-                    />
+                    Красава, круто перетащил
                 </div>
             )}
         </Draggable>

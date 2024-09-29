@@ -4,7 +4,7 @@ import { initialState } from './initialState';
 import { reducers } from './reducers';
 import { ActionType, StateType } from '../types/store';
 
-require('../aristarh');
+require('../../aristarh');
 
 const dispatcher: Reducer<StateType, ActionType> = (state = initialState, action) => {
     const { type, payload } = action;

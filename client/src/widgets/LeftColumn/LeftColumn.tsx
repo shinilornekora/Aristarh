@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { DraggableWidget } from "./DraggableWidget";
 import * as css from './LeftColumn.module.css';
 import { CustomDroppable } from "../../shared/framework/CustomDroppable/CustomDroppable";
-import { DroppableProvided, DroppableStateSnapshot } from '@hello-pangea/dnd';
+import { DroppableProvided } from '@hello-pangea/dnd';
 import { Actions, StateType } from "../../shared/types/store";
 
 export const LeftColumn = () => {
