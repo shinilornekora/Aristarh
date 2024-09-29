@@ -3,8 +3,10 @@ import React, { createContext, useState } from "react"
 import { DragDropContext, DropResult } from "@hello-pangea/dnd"
 import { LeftColumn } from "../LeftColumn"
 import { Constructor } from "../Constructor"
-import { CanvasWidgetProps, WidgetButtonsType } from "../../shared/types"
 import { widgetButtons } from "../LeftColumn/buttons"
+import { useSelector } from "react-redux"
+import { StateType } from "../../shared/types/store"
+import { CanvasWidgetProps, WidgetButtonsType } from "../../shared/types/ui"
 
 type _CONS_CONTEXT_TYPE = { 
     widgets: Array<CanvasWidgetProps>; 
@@ -19,8 +21,8 @@ export const WidgetContext = createContext<_CONS_CONTEXT_TYPE>({
 
 
 export const Canvas = () => {
-
     const [widgets, setWidgets] = useState<any[]>([ widgetButtons[0] ]);
+    const ProjectTree = useSelector<StateType, any>(state => state.project.tree)
 
     const handleOnDragEnd = (result: DropResult) => {
         if (!result.destination) return;

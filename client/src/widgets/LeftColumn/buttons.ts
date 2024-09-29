@@ -1,4 +1,4 @@
-import { WidgetButtonsType } from "../../shared/types";
+import { WidgetButtonsType } from "../../shared/types/ui";
 
 export const widgetButtons: WidgetButtonsType[] = [
     {

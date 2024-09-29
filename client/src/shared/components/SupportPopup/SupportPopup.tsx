@@ -4,9 +4,9 @@ import cn from 'classnames';
 
 import { BasePopup } from "../BasePopup";
 import { useDispatch } from 'react-redux';
-import { Actions } from '../../types';
 
 import * as css from './SupportPopup.module.css';
+import { Actions } from '../../types/store';
 
 export const SupportPopup = () => {
     const dispatch = useDispatch();

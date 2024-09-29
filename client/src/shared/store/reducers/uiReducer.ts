@@ -1,4 +1,4 @@
-import { Actions, ActionType, StateType } from "../../types";
+import { Actions, ActionType, StateType } from "../../types/store";
 
 export const uiReducer = (state: StateType, action: ActionType): StateType => {
     switch(action.type) {

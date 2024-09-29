@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 
 import cn from 'classnames';
-import { ButtonProps } from '../../types';
+import { ButtonProps } from '../../types/ui';
 
 export const Avatar: React.FC<ButtonProps> = ({ onClick, className, name, size, type, smartRef }) => {
     const [img, setImg] = useState('');

@@ -1,8 +1,6 @@
 import React, { useCallback } from "react";
 
 import { useSelector } from "react-redux";
-import { StateType } from "../../../../shared/types";
-import { TabType } from "../Tabs/Tabs";
 
 import { BasicStyles } from "./components/BasicStyles";
 import { AccommodationStyles } from "./components/AccomodationStyles";
@@ -10,6 +8,8 @@ import { ActionStyles } from "./components/ActionStyles";
 import { VisibilityStyles } from "./components/VisibilityStyles";
 
 import * as css from './Settings.module.css';
+import { StateType } from "../../../../shared/types/store";
+import { TabType } from "../../../../shared/types/ui";
 
 export const Settings: React.FC = () => {
     const selectedTab = useSelector<StateType, TabType>(state => state.control.rightColumnActiveTab ?? 'basic');

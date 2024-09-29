@@ -4,7 +4,7 @@ import { actions } from '../LeftColumn/actions';
 import { Avatar } from '../../shared/components/Avatar';
 
 import * as css from '../LeftColumn/LeftColumn.module.css';
-import { WidgetButtonsType } from '../../shared/types';
+import { WidgetButtonsType } from '../../shared/types/ui';
 
 type Props = {
     config: WidgetButtonsType;

@@ -1,4 +1,4 @@
-import { Api, ApiBaseHandler, ApiBaseType, ApiEntity } from "./types";
+import { Api, ApiBaseHandler, ApiBaseType, ApiEntity } from "../types/api";
 
 const SERVER_API_ROUTE = `${removePort(window.location.origin)}:3005/api`;
 

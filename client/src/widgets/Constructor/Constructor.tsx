@@ -6,8 +6,8 @@ import { Widget } from "./Widget";
 import { CustomDroppable } from "../../shared/framework/CustomDroppable/CustomDroppable";
 import { DroppableProvided } from '@hello-pangea/dnd';
 import * as css from './Constructor.module.css';
-import { CanvasWidgetProps } from "../../shared/types";
 import { WidgetContext } from "../Canvas";
+import { CanvasWidgetProps } from "../../shared/types/ui";
 
 export const Constructor = () => {
     const { widgets } = useContext(WidgetContext);

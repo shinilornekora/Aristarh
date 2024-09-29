@@ -1,6 +1,6 @@
-import { ToolsMenuVarsType } from '../../shared/components/Avatar';
 import { store } from '../../shared/store/store';
-import { Actions } from '../../shared/types';
+import { Actions } from '../../shared/types/store';
+import { ToolsMenuVarsType } from '../../shared/types/ui';
 
 interface DropdownMenuProp {
     name: string;

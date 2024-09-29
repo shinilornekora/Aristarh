@@ -4,7 +4,6 @@ import cn from 'classnames';
 
 import * as css from './ConfirmTextPopup.module.css';
 import { useDispatch } from 'react-redux';
-import { Actions } from '../../types';
 import { BasePopup } from '../BasePopup';
 
 type Props = {

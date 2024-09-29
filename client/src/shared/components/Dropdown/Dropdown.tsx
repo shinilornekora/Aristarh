@@ -14,7 +14,7 @@ import cn from 'classnames';
 import { OptionList } from './OptionList';
 
 import * as css from './Dropdown.module.css';
-import { ImageEvent } from '../types';
+import { ImageEvent } from '../../types/event';
 
 export interface DropdownOption {
     name: string;

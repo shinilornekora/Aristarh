@@ -1,8 +1,8 @@
 import { Reducer, configureStore } from '@reduxjs/toolkit';
 
-import { ActionType, StateType } from '../types';
 import { initialState } from './initialState';
 import { reducers } from './reducers';
+import { ActionType, StateType } from '../types/store';
 
 require('../aristarh');
 

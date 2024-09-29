@@ -1,4 +1,4 @@
-import { Actions, ActionType, StateType } from "../../types";
+import { Actions, ActionType, StateType } from "../../types/store";
 import { exportProjectScheme, startImportScenario } from "../../utils";
 
 export const projectReducer = (state: StateType, action: ActionType): StateType => {

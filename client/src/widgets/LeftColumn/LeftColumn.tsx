@@ -2,11 +2,11 @@ import React, { useCallback, useEffect, useState } from "react";
 import cn from 'classnames';
 import { widgetButtons } from "./buttons";
 import { useDispatch, useSelector } from "react-redux";
-import { Actions, StateType } from "../../shared/types";
 import { DraggableWidget } from "./DraggableWidget";
 import * as css from './LeftColumn.module.css';
 import { CustomDroppable } from "../../shared/framework/CustomDroppable/CustomDroppable";
 import { DroppableProvided, DroppableStateSnapshot } from '@hello-pangea/dnd';
+import { Actions, StateType } from "../../shared/types/store";
 
 export const LeftColumn = () => {
     const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export const LeftColumn = () => {
 
     return (
         <CustomDroppable droppableId="leftColumnDroppable">
-            {(provided: DroppableProvided, snapshot: DroppableStateSnapshot) => (
+            {(provided: DroppableProvided) => (
                 <div 
                     className={cn(css.container, { [css.show]: canShowColumn }, 'qa-LeftColumn')} 
                     ref={provided.innerRef} 

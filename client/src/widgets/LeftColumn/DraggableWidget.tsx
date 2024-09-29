@@ -4,7 +4,7 @@ import { Draggable } from "@hello-pangea/dnd";
 import { Avatar } from "../../shared/components/Avatar";
 import { actions } from "./actions";
 import * as css from './LeftColumn.module.css';
-import { WidgetButtonsType } from "../../shared/types";
+import { WidgetButtonsType } from "../../shared/types/ui";
 
 type Props = {
     config: WidgetButtonsType;

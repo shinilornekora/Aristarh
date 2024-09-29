@@ -1,4 +1,4 @@
-import { Actions, ActionType, StateType } from "../../types";
+import { Actions, ActionType, StateType } from "../../types/store";
 
 export const treeReducer = (state: StateType, action: ActionType): StateType => {
     const { type, payload } = action;

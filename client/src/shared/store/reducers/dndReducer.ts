@@ -1,4 +1,4 @@
-import { Actions, ActionType, StateType } from "../../types";
+import { Actions, ActionType, StateType } from "../../types/store";
 
 export const dndReducer = (state: StateType, action: ActionType): StateType => {
     const { type } = action;

@@ -2,11 +2,10 @@ import React, { useCallback } from "react";
 
 import { Tab } from "./Tab";
 
-import * as css from './Tabs.module.css';
 import { useDispatch } from "react-redux";
-import { Actions } from "../../../../shared/types";
-
-export type TabType = 'basic' | 'visibility' | 'actions' | 'accommodative';
+import { TabType } from "../../../../shared/types/ui";
+import { Actions } from "../../../../shared/types/store";
+import * as css from './Tabs.module.css';
 
 const tabsList: Array<TabType> = ['basic', 'visibility', 'actions', 'accommodative'];
 

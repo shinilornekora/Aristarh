@@ -2,8 +2,8 @@ import React from "react";
 
 import { useCallback, useMemo } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { Actions, StateType } from "../types";
 import { ConfirmTextPopup } from "../components/ConfirmPopup/ConfirmTextPopup";
+import { Actions, StateType } from "../types/store";
 
 export const RenameProjectProcess = () => {
     const isRenamingScenario = useSelector<StateType, boolean>(state => state.scenarios.renamingProject);

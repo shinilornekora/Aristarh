@@ -1,9 +1,4 @@
-import { MutableRefObject } from "react";
-import { TabType } from "../widgets/RightColumn/components/Tabs/Tabs";
-
-export type DropdownsType = 'common' | 'server' | 'cursor' | 'page' | 'widget' | 'preview' | 'help' | undefined;
-
-export type Line = 'x' | 'y';
+import { DropdownsType, TabType } from "./ui";
 
 export enum Actions {
     ADD_TO_TREE = 'add-to-tree',
@@ -35,48 +30,15 @@ export enum Actions {
     SET_PROJECT_GLOBALLY = 'set-project-globally'
 }
 
-export interface NodeDataType {
-    name?: string;
-    component?: JSX.Element;
-    children?: Node;
-}
-
-export type ToolsMenuVarsType = 'common' | 'server' | 'widget' | 'page' | 'cursor' | 'preview' | 'help';
-export type WidgetMenuVarsType = 'button' | 'text' | 'line' | 'square' | 'triangle' | 'circle' | 'star';
-
-export type AvailableAvatars = ToolsMenuVarsType | WidgetMenuVarsType;
-
-export type ButtonProps = {
-    name: AvailableAvatars;
-    size: number;
-    smartRef?: MutableRefObject<HTMLImageElement | null>;
-    className?: string;
-    type: 'svg' | 'png';
-    onClick?: (eventful: unknown) => void;
-}
-
-export interface WidgetButtonsType {
-    name: WidgetMenuVarsType;
-    size: number;
-    type: 'svg' | 'png';
-}
-
-export type CanvasWidgetProps = WidgetButtonsType & {
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-}
-
-// @ts-expect-error: так и надо, это рекурсивный тип
-export type Node = Record<string, Node>
-
 export interface ActionType {
     type: Actions;
     payload: Payload;
 };
 
-export type ImageEvent = { currentTarget: HTMLImageElement };
+export type Project = {
+    name: string;
+    tree: Node;
+}
 
 export interface Payload extends Project {
     cords?: Record<Line, number>
@@ -87,10 +49,6 @@ export interface Payload extends Project {
     tab?: TabType;
 }
 
-export type Project = {
-    name: string;
-    tree: Node;
-}
 
 export interface StateType {
     project: Project;
@@ -106,3 +64,14 @@ export interface StateType {
         isLeftColumnVisible: boolean;
     }
 }
+
+export type Line = 'x' | 'y';
+
+export interface NodeDataType {
+    name?: string;
+    component?: JSX.Element;
+    children?: Node;
+}
+
+// @ts-expect-error: так и надо, это рекурсивный тип
+export type Node = Record<string, Node>
