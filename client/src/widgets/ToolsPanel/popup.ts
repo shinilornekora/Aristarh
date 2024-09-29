@@ -1,4 +1,4 @@
-import { ToolsMenuVarsType } from '../../shared/Avatar';
+import { ToolsMenuVarsType } from '../../shared/components/Avatar';
 import { store } from '../../shared/store';
 import { Actions } from '../../shared/types';
 

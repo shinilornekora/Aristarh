@@ -1,22 +1,54 @@
 import React, { useContext } from "react";
+import cn from 'classnames';
 
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { WidgetButtonsType } from '../LeftColumn/buttons';
-
-import * as css from './Constructor.module.css';
+import { Draggable, DraggableProvided } from '@hello-pangea/dnd';
 import { Widget } from "./Widget";
-import { WidgetContext } from "../../pages/Main";
+import { CustomDroppable } from "../../shared/framework/CustomDroppable/CustomDroppable";
+import { DroppableProvided } from '@hello-pangea/dnd';
+import * as css from './Constructor.module.css';
+import { CanvasWidgetProps } from "../../shared/types";
+import { WidgetContext } from "../Canvas";
 
 export const Constructor = () => {
     const { widgets } = useContext(WidgetContext);
 
     return ( 
-        <div className={ css.container }>
-            <div className={ css.inner }>
-                {widgets.map((widget: WidgetButtonsType, index) => (
-                    <Widget key={widget.name} config={widget} index={index} /> 
-                ))}
-            </div>
-        </div> 
-    )
-}
+        <CustomDroppable droppableId="constructorDroppable">
+            {(provided: DroppableProvided) => (
+                <div 
+                    className={ cn(css.container, 'qa-Constructor') } 
+                    ref={provided.innerRef} 
+                    {...provided.droppableProps}
+                >
+                    <div className={ cn(css.canvas, 'qa-Canvas') }>
+                        {widgets.map((widget: CanvasWidgetProps, index: number) => (
+                            <Draggable 
+                                key={widget.name} 
+                                draggableId={widget.name} 
+                                index={index}
+                            >
+                                {(provided: DraggableProvided) => (
+                                    <div 
+                                        ref={provided.innerRef}
+                                        className={ cn(css.widgetPos, `qa-Widget-On-Canvas-${widget.name}`) }
+                                        {...provided.draggableProps} 
+                                        {...provided.dragHandleProps}
+                                        style={{
+                                            ...provided.draggableProps.style,
+                                            width: 'fit-content',
+                                            left: widget.x,
+                                            top: widget.y,
+                                        }}
+                                    >
+                                        <Widget config={widget} index={index} /> 
+                                    </div>
+                                )}
+                            </Draggable>
+                        ))}
+                        {provided.placeholder}
+                    </div>
+                </div>
+            )}
+        </CustomDroppable>
+    );
+};

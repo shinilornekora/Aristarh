@@ -1,3 +1,4 @@
+import { MutableRefObject } from "react";
 import { TabType } from "../widgets/RightColumn/components/Tabs/Tabs";
 
 export type DropdownsType = 'common' | 'server' | 'cursor' | 'page' | 'widget' | 'preview' | 'help' | undefined;
@@ -38,6 +39,33 @@ export interface NodeDataType {
     name?: string;
     component?: JSX.Element;
     children?: Node;
+}
+
+export type ToolsMenuVarsType = 'common' | 'server' | 'widget' | 'page' | 'cursor' | 'preview' | 'help';
+export type WidgetMenuVarsType = 'button' | 'text' | 'line' | 'square' | 'triangle' | 'circle' | 'star';
+
+export type AvailableAvatars = ToolsMenuVarsType | WidgetMenuVarsType;
+
+export type ButtonProps = {
+    name: AvailableAvatars;
+    size: number;
+    smartRef?: MutableRefObject<HTMLImageElement | null>;
+    className?: string;
+    type: 'svg' | 'png';
+    onClick?: (eventful: unknown) => void;
+}
+
+export interface WidgetButtonsType {
+    name: WidgetMenuVarsType;
+    size: number;
+    type: 'svg' | 'png';
+}
+
+export type CanvasWidgetProps = WidgetButtonsType & {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
 }
 
 // @ts-expect-error: так и надо, это рекурсивный тип

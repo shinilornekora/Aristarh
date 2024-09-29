@@ -9,6 +9,7 @@
     left: -50px;
     opacity: 0;
     padding: 10px 0;
+    z-index: 100;
 }
 
 .content {
@@ -28,4 +29,8 @@
 
 .pic:hover {
     cursor: pointer;
+}
+
+.widget {
+    opacity: 1;
 }

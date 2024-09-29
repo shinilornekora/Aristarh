@@ -1,6 +1,5 @@
-import { WidgetMenuVarsType } from "../../shared/Avatar";
 import { store } from "../../shared/store";
-import { Actions } from "../../shared/types";
+import { Actions, WidgetMenuVarsType } from "../../shared/types";
 
 type UnknownEvent = (eventful: unknown) => void;
 type ActionsType = Record<WidgetMenuVarsType, { handler: UnknownEvent; }>

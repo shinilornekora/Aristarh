@@ -1,5 +1,4 @@
 import React, {
-    MutableRefObject, 
     useCallback, 
     useEffect, 
     useRef, 
@@ -7,20 +6,7 @@ import React, {
 } from 'react';
 
 import cn from 'classnames';
-
-export type ToolsMenuVarsType = 'common' | 'server' | 'widget' | 'page' | 'cursor' | 'preview' | 'help';
-export type WidgetMenuVarsType = 'button' | 'text' | 'line' | 'square' | 'triangle' | 'circle' | 'star';
-
-type AvailableAvatars = ToolsMenuVarsType | WidgetMenuVarsType;
-
-export type ButtonProps = {
-    name: AvailableAvatars;
-    size: number;
-    smartRef?: MutableRefObject<HTMLImageElement | null>;
-    className?: string;
-    type: 'svg' | 'png';
-    onClick?: (eventful: unknown) => void;
-}
+import { ButtonProps } from '../../types';
 
 export const Avatar: React.FC<ButtonProps> = ({ onClick, className, name, size, type, smartRef }) => {
     const [img, setImg] = useState('');
@@ -32,7 +18,7 @@ export const Avatar: React.FC<ButtonProps> = ({ onClick, className, name, size, 
 
     useEffect(() => {
         (async () =>
-            import(`../../static/svg/icon-${name}.${type}`)
+            import(`../../../static/svg/icon-${name}.${type}`)
                 .then(image => setImg(image.default))
         )();
     }, [name, type]);

@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 import { BasePopup } from "../BasePopup";
 import { useDispatch } from 'react-redux';
-import { Actions } from '../types';
+import { Actions } from '../../types';
 
 import * as css from './SupportPopup.module.css';
 

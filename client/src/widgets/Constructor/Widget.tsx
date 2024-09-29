@@ -1,10 +1,10 @@
 import React from 'react';
-import { Draggable } from 'react-beautiful-dnd';
-import { WidgetButtonsType } from '../LeftColumn/buttons';
+import { Draggable } from '@hello-pangea/dnd';
 import { actions } from '../LeftColumn/actions';
-import { Avatar } from '../../shared/Avatar';
+import { Avatar } from '../../shared/components/Avatar';
 
 import * as css from '../LeftColumn/LeftColumn.module.css';
+import { WidgetButtonsType } from '../../shared/types';
 
 type Props = {
     config: WidgetButtonsType;

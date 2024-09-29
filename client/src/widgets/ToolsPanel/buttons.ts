@@ -1,4 +1,4 @@
-import { ButtonProps } from "../../shared/Avatar/Avatar";
+import { ButtonProps } from "../../shared/components/Avatar/Avatar";
 
 export const menuButtons: ButtonProps[] = [
     {
