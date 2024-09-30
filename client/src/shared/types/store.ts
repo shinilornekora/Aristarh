@@ -22,6 +22,7 @@ export enum Actions {
     END_EXPORT_SCENARIO = 'end-export-scenario',
     START_EXPORT_PROJECT_SCENARIO = 'start-export-project-scenario',
     CHANGE_MOUSE_STATE = 'change-mouse-state',
+    FIX_MOUSE_DROP_CORDS = 'fix-mouse-drop-cords',
     OPEN_RIGHT_COLUMN = 'open-right-column',
     OPEN_LEFT_COLUMN = 'open-left-column',
     CLOSE_LEFT_COLUMN = 'close-left-column',
@@ -46,8 +47,10 @@ export interface NexusTreeNode {
     children: NexusTreeNode[];
     type: string;
     styles?: Record<string, any>;
-    x: number; // Add x coordinate
-    y: number; // Add y coordinate
+    x: number;
+    y: number;
+    width: number;
+    height: number;
 }
 
 
@@ -66,14 +69,19 @@ export interface Payload extends Project {
     tab?: TabType;
 }
 
+export type MouseType = {
+    x: number;
+    y: number;
+}
 
 export interface StateType {
     project: Project;
     user: string;
     control: {
+        targetElementId?: string;
         activePopup?: DropdownsType;
         rightColumnActiveTab?: TabType;
-        targetElementId?: string;
+        lastMouseDropCords?: MouseType;
     }
     scenarios: {
         renamingProject: boolean;

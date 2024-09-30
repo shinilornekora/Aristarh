@@ -48,6 +48,14 @@ export const treeReducer = (state: StateType, action: ActionType): StateType => 
                 }
             };
         }
+        case Actions.FIX_MOUSE_DROP_CORDS:
+            return {
+                ...state,
+                control: {
+                    ...state.control,
+                    lastMouseDropCords: payload.cords
+                }
+            }
         default:
             return state;
     }

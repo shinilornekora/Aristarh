@@ -1,21 +1,27 @@
-import { NexusTreeNode } from '../../../shared/types/store';
+import { NexusTreeNode, NexusTreeState } from '../../../shared/types/store';
+import { isPointInNode } from './isPointInNode';
 
+interface WidgetClearedType {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+}
 
-const isPointInNode = (x: number, y: number, node: NexusTreeNode): boolean => {
-    // Прокинуть общее значение!
-    const nodeWidth = 100;
-    const nodeHeight = 50;
+export interface _EXPLORE_LOC_TYPE {
+    newWidget: WidgetClearedType;
+    root: NexusTreeNode;
+}
 
-    return (
-        x >= node.x &&
-        x <= node.x + nodeWidth &&
-        y >= node.y &&
-        y <= node.y + nodeHeight
-    );
-};
-
-export const exploreLocation = (x: number, y: number, root: NexusTreeNode): string[] | number => {
+// TODO - доработки.
+// Единственная честная Droppable секция - это холст.
+// Логично что нам нужно будет перевести все координаты нод на координаты виджета
+// Тогда функция isPointInNode будет работать как нужно.
+// Для этого нужно еще одну обертку сделать
+export const _exploreLocation = ({ newWidget, root }: _EXPLORE_LOC_TYPE): string[] | number => {
     // Function to understand the place of the widget on the canvas
+
+    const { x, y } = newWidget
 
     if (x === undefined || y === undefined) {
         Aristarh.scream('[DND]: NO COORDINATES OF DROPPED WIDGET!');
@@ -26,7 +32,12 @@ export const exploreLocation = (x: number, y: number, root: NexusTreeNode): stri
     const path: string[] = [];
 
     const findNode = (node: NexusTreeNode, currentPath: string[]) => {
-        if (isPointInNode(x, y, node)) {
+        if (node.id === 'root') {
+            path.push(node.id);
+            return true;
+        }
+
+        if (isPointInNode({ newWidget, root: node })) {
             path.push(...currentPath, node.id);
             return true;
         }
@@ -45,3 +56,41 @@ export const exploreLocation = (x: number, y: number, root: NexusTreeNode): stri
 
     return -1;
 };
+
+interface ExploreLocationType {
+    node: NexusTreeNode;
+    tree: NexusTreeState;
+}
+
+export const exploreLocation = ({ node, tree }: ExploreLocationType) => {
+    const canvas = document.getElementsByClassName('qa-Canvas')[0];
+
+    if (!canvas) {
+        Aristarh.scream("[ERROR]: Canvas cannot be found!");
+        return -1;
+    }
+
+    const rectangledCanvas = canvas.getBoundingClientRect();
+
+    // Примем как данность координаты холста для корня
+    const clearRootCords = {
+        ...tree.root,
+        x: tree.root.x - rectangledCanvas.x,
+        y: tree.root.x - rectangledCanvas.y,
+        width: tree.root.width,
+        height: tree.root.height,
+    }
+
+    // Соответственно тоже самое для нового виджета
+    const clearWidgetCords = {
+        x: node.x - rectangledCanvas.x,
+        y: node.y - rectangledCanvas.y,
+        width: node.width,
+        height: node.height,
+    }
+
+    return _exploreLocation({
+        newWidget: clearWidgetCords,
+        root: clearRootCords
+    })
+}

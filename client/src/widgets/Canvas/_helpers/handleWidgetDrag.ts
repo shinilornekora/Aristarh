@@ -1,3 +1,3 @@
 export const handleWidgetDrag = (result: any) => {
-    Aristarh.voice("DnD scenario [START]: ", result);
+    Aristarh.voice("[DRAG]: DnD scenario start", result);
 };

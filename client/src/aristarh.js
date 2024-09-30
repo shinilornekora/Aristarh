@@ -12,6 +12,7 @@
  */
 window['Aristarh'] = {
     DEBUG: 'disabled',
+    getState: async () => (await import('./shared/store/store')).store.getState(),
     setDebugMode: (value) => Aristarh.DEBUG = value,
     log: (text, rest, level) => Aristarh.DEBUG === 'log' ? console[level](text, rest) : null,
     voice: (text, ...rest) => Aristarh.log(text, rest, 'log'),
